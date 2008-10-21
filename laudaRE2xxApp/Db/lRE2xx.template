@@ -1,0 +1,50 @@
+################################################################
+#
+# Lauda Ecoline Staredition RE2xx template file.
+#
+# Macros:
+#   P - Prefix for PV name
+#   PORT - Bus/Port Address (eg. ASYN Port).
+#   ADDR - Address on the bus (optional)
+#   SCAN - SCAN rate for read parameters.
+#
+# Notes:
+#   Temperature reading is handled by the alarm handler
+#
+################################################################
+
+#% gdatag,template,lRE2xx,$(gda_name),$(gda_desc)
+
+
+################################################################
+# Read records
+################################################################
+
+# ///
+# /// Read the water temperature.
+# ///
+#% gdatag,pv,ro,$(gda_name),TEMP
+#% archiver 10 Monitor
+#% alh
+record(ai, "$(P):TEMP") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(PREC, 6)
+  field(EGU, "C")
+}
+
+
+# ///
+# /// Read the status bits.
+# ///
+#% gdatag,array,ro,$(gda_name),STATUS
+#% archiver 10 Monitor
+#% alh
+record(waveform, "$(P):STATUS") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getStatus $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(NELM, "5")
+  field(FTVL, "CHAR")
+}
