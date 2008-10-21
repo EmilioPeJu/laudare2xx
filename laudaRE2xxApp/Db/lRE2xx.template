@@ -47,15 +47,22 @@ record(waveform, "$(P):STATUS") {
   field(SCAN, "$(SCAN) second")
   field(NELM, "5")
   field(FTVL, "CHAR")
+  field(FLNK, "$(P):STATUS:FAN")
 }
+
+record(fanout, "$(P):STATUS:FAN") {
+  field(LNK1, "$(P):STATUS:B5")
+}
+
 
 # ///
 # /// Read the over temperature status bit
 # ///
-#record(subArray, "$(P):STATUS:B5") {
-#  field(FLNK, "$(P):FORMAT")
-#  field(FTVL, "CHAR")
-#  field(INP, "$(P):STATUS")
-#  field(MALM, "1")
-#  field(INDX, "4")
-#}
+record(subArray, "$(P):STATUS:B5") {
+  field(FLNK, "$(P):FORMAT")
+  field(FTVL, "CHAR")
+  field(INP, "$(P):STATUS")
+  field(MALM, "1")
+  field(INDX, "4")
+}
+
