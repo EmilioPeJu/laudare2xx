@@ -48,3 +48,14 @@ record(waveform, "$(P):STATUS") {
   field(NELM, "5")
   field(FTVL, "CHAR")
 }
+
+# ///
+# /// Read the over temperature status bit
+# ///
+#record(subArray, "$(P):STATUS:B5") {
+#  field(FLNK, "$(P):FORMAT")
+#  field(FTVL, "CHAR")
+#  field(INP, "$(P):STATUS")
+#  field(MALM, "1")
+#  field(INDX, "4")
+#}
