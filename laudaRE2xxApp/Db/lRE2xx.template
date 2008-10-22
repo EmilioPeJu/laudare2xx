@@ -23,7 +23,6 @@
 # ///
 # /// Read the water temperature.
 # ///
-#% gdatag,pv,ro,$(gda_name),TEMP
 #% archiver 10 Monitor
 #% alh
 record(ai, "$(P):TEMP") {
@@ -38,7 +37,6 @@ record(ai, "$(P):TEMP") {
 # ///
 # /// Read the status bits.
 # ///
-#% gdatag,array,ro,$(gda_name),STATUS
 #% archiver 10 Monitor
 #% alh
 record(waveform, "$(P):STATUS") {
