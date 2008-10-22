@@ -66,3 +66,26 @@ record(subArray, "$(P):STATUS:B5") {
   field(INDX, "4")
 }
 
+#################################################################
+# Generic protocol PV, to send any command.
+#################################################################
+
+# ///
+# /// Generic commands. Do a caput on this, and do a subsequent caget to get the response. Max 39 chars.
+# ///
+#% gdatag,pv,rw,$(gda_name),RESPONSE
+record (stringin, "$(P):RESPONSE") {
+  field (DTYP, "stream")
+  field (DESC, "Holds response from command string.")
+  field (INP, "@lRE2xx.proto gen $(PORT) $(ADDR)")
+}
+
+# ///
+# /// Generic command. This holds the command and stores it.
+# ///
+#% gdatag,pv,rw,$(gda_name),COMMAND
+record (stringout, "$(P):COMMAND") {
+  field (DESC, "Holds command string.")
+  field (OUT, "$(P):RESPONSE")
+  field(FLNK, "$(P):RESPONSE")
+}
