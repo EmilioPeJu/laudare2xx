@@ -1,0 +1,119 @@
+/**
+\mainpage Lauda Ecoline Staredition RE2xx EPICS Support Module
+\section intro_sec Introduction
+9 July 2008
+
+The laudaRE2xx support module provides an EPICS interface to the Lauda Ecoline Staredition RE2xx.
+
+\subsection use_sec How to use this support module within an IOC application.
+
+This support module makes use of the EPICS ASYN and Streams extensions. Also needed are IPAC,
+HY8515 and UTILITY.
+
+<ol>
+<li> Add a macro that points to the module in configure/RELEASE. The other modules
+need to be referenced too, e.g. 
+\verbatim
+    ASYN=		$(SUPPORT)/asyn/4-9
+    STREAM=		$(SUPPORT)/streamDevice/2-1dls4
+    KEITHLEY2400=	$(SUPPORT)/laudaRE2xx/X-X
+    IPAC=		$(SUPPORT)/ipac/2-8dls4-3
+    HY8515=		$(SUPPORT)/Hy8515/3-7
+    UTILITY=		$(SUPPORT)/utility/dls2-8
+    AUTOSAVE=           $(SUPPORT)/autosave/4-2-1dls1
+\endverbatim
+
+<li> Add the module DBD file to the list of DBD. e.g. in src/Makefile\n
+\verbatim
+
+    	example_DBD += lRE2xx.dbd
+
+    #Note that the module requires the following DBD files in addition to base.dbd
+    	example_DBD += base.dbd
+	example_DBD += asyn.dbd
+	example_DBD += stream.dbd
+	example_DBD += drvAsynSerialPort.dbd
+	example_DBD += drvAsynIPPort.dbd
+	example_DBD += lRE2xx.dbd
+	example_DBD += utility.dbd
+	example_DBD += drvIpac.dbd
+	example_DBD += Hy8515.dbd
+	example_DBD += Hy8001.dbd
+	example_DBD += asSupport.dbd
+\endverbatim
+
+<li> Also in src/Makefile add the following libraries:
+\verbatim
+    	example_LIBS += asyn
+    	example_LIBS += stream
+	example_LIBS += utility
+        example_LIBS += Ipac
+        example_LIBS += drvHy8515
+        example_LIBS += autosave
+\endverbatim
+
+<li> In the Db/Makefile, the following is needed:
+\verbatim
+    USES_TEMPLATE += $(LAUDARE2XX)/db/lRE2xx.template
+\endverbatim
+
+<li> In the IOC startup file, the following needs to be added:
+\verbatim
+    #Define protocol path
+    epicsEnvSet("STREAM_PROTOCOL_PATH", "$(LAUDARE2XX)/data/")
+\endverbatim
+
+For configuration of Hytec hardware and autosave, see the startup file in the example IOC provided with the support module.
+
+<li> In the substitution file (or spreadsheet), the template is instantiated like so:
+\verbatim
+    file lRE2xx.template
+    {
+      pattern {P, PORT, ADDR, SCAN}
+               {mp49:lRE2xx, ty_50_0, 0, 1}
+    }
+\endverbatim
+
+Where the ty_50_0 is the ASYN serial port. The SCAN parameter determins how frequently temperature is read.
+
+</ol>
+
+**/
+
+/**
+\page build_sec Build Instructions
+
+The support module contains the following elements
+
+- laudaRE2xxApp\n
+  The actual EPICS support module to be used by an IOC application.\n
+  Build this module by simply running "make install"
+  
+
+- example\n
+  An EPICS IOC application that uses this laudaRE2xxApp\n
+  Build this module by simply running "make install"
+
+**/
+
+
+/**
+\page add_sec How to add functionality to the module
+
+To add more functionality to this support module (by adding support for more Lauda RE2xx  commands), 
+the following files must be edited:
+
+- laudaRE2xxApp/protocol/lRE2xx.proto\n
+  Add the streamDevice protocol functions in this file.
+
+- laudaRE2xxApp/Db/lRE2xx.template\n
+  Add the corresponding record, which when processed will call the streamDevice function.
+
+- documentation/UserGuide.xml\n
+  Update the user guide documentation (add the new PVs to the list with a short explanation).
+
+Upgrades:
+
+- 
+
+**/

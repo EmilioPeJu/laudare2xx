@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+  "/usr/share/sgml/docbook/xml-dtd-4.3-1.0-25/docbookx.dtd">
+ 
+<article>
+
+  <articleinfo>
+    <title>EPICS Lauda Ecoline Staredition RE2xx Support Module User Guide</title>
+    <author>
+    <personname>
+      <honorific>Dr</honorific>
+      <firstname>Matthew</firstname>
+      <surname>Pearson</surname>
+    </personname>
+  </author>
+    <copyright>
+      <year>2008</year>
+      <holder>Copyright 2008 Diamond Light Source Limited</holder>
+    </copyright>
+  </articleinfo>
+
+  <sect1>
+    <title>Links for detailed information on the Lauda RE2xx.</title>
+    <para><ulink url="http://www.lauda.de">Product Details</ulink></para>
+    <para><ulink url="http://diamdocs2003.diamond.ac.uk/sites/default/TECHNICAL%20DIVISION%20(TEC)/Controls%20and%20Interlocks%20CTRL/Supplier%20Documentation/Lauda/YACE0060_V40b2_RE2xx_Staredition_2005-08-25.pdf">User Manual (local)</ulink></para>
+
+  <sect2>
+    <title>Notes</title>
+    <para><ulink url="http://diamdocs2003.diamond.ac.uk/sites/default/TECHNICAL%20DIVISION%20(TEC)/Controls%20and%20Interlocks%20CTRL/Requirements%20(REQ)/LaudaRE-requirements.doc">The orginal controls software requirements document.</ulink></para>
+    <para>This software support for the Lauda RE2xx is detailed in the requirements document. All the PVs detailed in this user guide are available via the EDM control GUI.</para>
+  </sect2>
+  </sect1>
+
+<sect1>
+ <title>Communication Setup</title>
+ <sect2>
+   <title></title>
+   <para>The EPICS control software only works with the below communication setup.</para>
+   <simplelist type='horiz' columns='2'>
+      <member>Bus Type</member>
+      <member>RS-232</member>
+      <member>Bits</member>
+      <member>8</member>
+      <member>Parity</member>
+      <member>None</member>
+      <member>Terminator</member>
+      <member>CR+LF</member>
+      <member>Flow Control</member>
+      <member>None</member>
+      <member>Baud Rate</member>
+      <member>Tested at 9600.</member>
+   </simplelist>
+   <para>The tested hardware setup was a 8002+8515+Serial PIM. Use a straight through serial cable.</para>
+ </sect2>
+</sect1>
+
+  <sect1>
+       <title>Process Variable (PV) Names</title>
+         <sect2>
+           <title>Read Only PVs</title>
+             <para>Note: {P} is dependent on how the software has been set-up.</para>
+             <simplelist type='horiz' columns='2'>
+             <member>{P}:TEMP</member>
+             <member>Read the current water temperature (outflow)</member>
+             <member>{P}:STATUS</member>
+             <member>Read the current status bits.</member>
+             <member>{P}:RESPONSE</member>
+             <member>This contains the response from the execution of the COMMAND PV</member>
+             </simplelist>
+         </sect2>
+
+         <sect2>
+             <title>Write Only PVs</title>
+             <simplelist type='horiz' columns='2'>
+             <member>{P}:COMMAND</member>
+             <member>Use this PV to send any command to the device (max 39 chars). If there is any response, it is placed in the RESPONSE PV.</member>
+             </simplelist>
+         </sect2>
+  </sect1>
+
+  <sect1>
+      <title>Trouble Shooting</title>
+
+      <sect2>
+      <title>Device not responding?</title>
+      <para></para>
+      <itemizedlist mark='opencircle'>
+      <listitem><para>
+         Restart the IOC where this database is hosted.
+      </para></listitem>
+      <listitem><para>
+         Check the communication setup on the device. 
+      </para></listitem>
+      <listitem><para>
+         Try powering the device on and off.
+      </para></listitem>
+      </itemizedlist>
+      </sect2>
+      
+      <sect2>
+      <title></title>
+      <para></para>
+      <para></para>
+      <para></para>
+      </sect2>
+      
+  </sect1>    
+</article>
