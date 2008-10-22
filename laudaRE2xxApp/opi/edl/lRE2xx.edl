@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 310
-y 233
+x 1999
+y 617
 w 450
 h 350
 font "helvetica-medium-r-18.0"
@@ -71,8 +71,8 @@ minor 1
 release 0
 x 340
 y 50
-w 50
-h 20
+w 45
+h 16
 font "arial-bold-r-14.0"
 fgColor index 10
 bgColor index 3
@@ -243,7 +243,7 @@ font "helvetica-medium-r-18.0"
 buttonLabel "HELP"
 numCmds 1
 command {
-  0 "firefox /dls_sw/prod/R3.14.8.2/support/keithley2400/1-0/documentation/UserGuide/html/t1.html /dls_sw/prod/R3.14.8.2/support/keithley2400/1-0/documentation/ProgrammerGuide/html/index.html &"
+  0 "firefox $(laudaRE2xxPath)/documentation/UserGuide/html/t1.html $(laudaRE2xxPath)/documentation/ProgrammerGuide/html/index.html &"
 }
 endObjectProperties
 
@@ -257,6 +257,7 @@ x 350
 y 80
 w 30
 h 100
+controlPv "$(P):STATUS"
 lineColor index 14
 onColor index 20
 offColor index 24
