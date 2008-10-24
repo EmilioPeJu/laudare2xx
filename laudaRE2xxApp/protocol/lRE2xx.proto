@@ -36,9 +36,18 @@ getStatus {
    ExtraInput = Ignore;
    seperator = "";
    out "STAT";
-   in "%c";
+   in "%1d";
 }
 
+
+###################################################
+# Set functions
+###################################################
+
+# /// Set the setpoint for water temperature (temperature must be specific format (up to 3 digits before decimal point and up to 2 digits after decimal point).
+setTemp {
+   out "OUT_SP_00_%f";
+}
 
 
 

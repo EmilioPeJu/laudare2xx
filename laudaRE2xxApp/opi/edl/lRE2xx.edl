@@ -129,8 +129,8 @@ x 50
 y 80
 w 130
 h 20
-controlPv "$(P):V"
-format "exponential"
+controlPv "$(P):TEMP"
+format "float"
 font "helvetica-medium-r-10.0"
 fontAlign "center"
 fgColor index 16
@@ -360,6 +360,46 @@ bgColor index 3
 useDisplayBg
 value {
   "Internal Fault 2"
+}
+autoSize
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 50
+y 130
+w 130
+h 40
+controlPv "$(P):SET_TEMP"
+displayMode "decimal"
+precision 2
+fgColor index 25
+bgColor index 3
+fill
+font "helvetica-medium-r-12.0"
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 10
+y 110
+w 160
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Set Water Temperature"
 }
 autoSize
 endObjectProperties

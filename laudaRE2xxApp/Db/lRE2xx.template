@@ -13,8 +13,6 @@
 #
 ################################################################
 
-#% gdatag,template,lRE2xx,$(gda_name),$(gda_desc)
-
 
 ################################################################
 # Read records
@@ -24,13 +22,22 @@
 # /// Read the water temperature.
 # ///
 #% archiver 10 Monitor
-#% alh
+#% alh $SEVRCOMMAND UP_ANY /dls_sw/tools/bin/dls-alh-handler.py $(P):TEMP
 record(ai, "$(P):TEMP") {
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
-  field(PREC, 6)
+  field(PREC, 2)
   field(EGU, "C")
+  field(HIHI, "$(HIHI)")
+  field(HIGH, "$(HIGH)")
+  field(LOW,  "$(LOW)")
+  field(LOLO, "$(LOLO)")
+  field(HHSV, "MAJOR")
+  field(HSV,  "MINOR")
+  field(LSV,  "MINOR")
+  field(LLSV, "MAJOR")
+  field(HYST, 0.1)
 }
 
 
@@ -38,14 +45,14 @@ record(ai, "$(P):TEMP") {
 # /// Read the status bits.
 # ///
 #% archiver 10 Monitor
-#% alh
-record(waveform, "$(P):STATUS") {
+#% alh $SEVRCOMMAND UP_ANY /dls_sw/tools/bin/dls-alh-handler.py $(P):STATUS
+record(ai, "$(P):STATUS") {
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getStatus $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
-  field(NELM, "5")
-  field(FTVL, "CHAR")
   field(FLNK, "$(P):STATUS:FAN")
+  field(HIHI, 1)
+  field(HHSV, "MAJOR")
 }
 
 record(fanout, "$(P):STATUS:FAN") {
@@ -56,13 +63,25 @@ record(fanout, "$(P):STATUS:FAN") {
 # ///
 # /// Read the over temperature status bit
 # ///
-record(subArray, "$(P):STATUS:B5") {
-  field(FLNK, "$(P):FORMAT")
-  field(FTVL, "CHAR")
-  field(INP, "$(P):STATUS")
-  field(MALM, "1")
-  field(INDX, "4")
+record(ai, "$(P):STATUS:B5") {
+  field(INP, "$(P):STATUS >> 4")
 }
+
+
+################################################################
+# Write records
+################################################################
+
+# ///
+# /// Set the setpoint water temperature (temperature must be specific format (up to 3 digits before decimal point and up to 2 digits after decimal point).
+# ///
+#% autosave 1 VAL
+record(ao, "$(P):SET_TEMP") {
+  field(DTYP, "stream")
+  field(DESC, "Setpoint temperature")
+  field(OUT, "@lRE2xx.proto setTemp $(PORT) $(ADDR)")
+}
+
 
 #################################################################
 # Generic protocol PV, to send any command.
