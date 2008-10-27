@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1999
-y 617
+x 1313
+y 283
 w 450
 h 350
 font "helvetica-medium-r-18.0"
@@ -261,6 +261,7 @@ controlPv "$(P):STATUS"
 lineColor index 14
 onColor index 20
 offColor index 24
+endian "little"
 numBits 5
 endObjectProperties
 
