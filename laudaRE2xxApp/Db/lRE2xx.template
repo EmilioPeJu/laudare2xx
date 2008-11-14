@@ -92,7 +92,7 @@ record(ao, "$(P):SET_TEMP") {
 # ///
 record (stringin, "$(P):RESPONSE") {
   field (DTYP, "stream")
-  field (DESC, "Holds response from command string.")
+  field (DESC, "Command string response.")
   field (INP, "@lRE2xx.proto gen $(PORT) $(ADDR)")
 }
 
