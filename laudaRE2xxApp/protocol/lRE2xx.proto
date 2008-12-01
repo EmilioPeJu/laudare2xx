@@ -36,7 +36,7 @@ getStatus {
    ExtraInput = Ignore;
    seperator = "";
    out "STAT";
-   in "%1d";
+   in "%5d";
 }
 
 
