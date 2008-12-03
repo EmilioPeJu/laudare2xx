@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1313
-y 283
+x 764
+y 312
 w 450
 h 350
 font "helvetica-medium-r-18.0"
@@ -21,6 +21,7 @@ topShadowColor index 1
 botShadowColor index 11
 showGrid
 snapToGrid
+gridSize 5
 endScreenProperties
 
 # (Static Text)
@@ -151,7 +152,7 @@ major 4
 minor 1
 release 0
 x 10
-y 210
+y 220
 w 76
 h 16
 font "arial-bold-r-14.0"
@@ -171,7 +172,7 @@ major 10
 minor 0
 release 0
 x 90
-y 200
+y 210
 w 350
 h 40
 controlPv "$(P):COMMAND"
@@ -190,7 +191,7 @@ major 4
 minor 1
 release 0
 x 90
-y 250
+y 260
 w 350
 h 20
 controlPv "$(P):RESPONSE"
@@ -212,7 +213,7 @@ major 4
 minor 1
 release 0
 x 10
-y 250
+y 260
 w 72
 h 16
 font "arial-bold-r-14.0"
@@ -261,7 +262,6 @@ controlPv "$(P):STATUS"
 lineColor index 14
 onColor index 20
 offColor index 24
-endian "little"
 numBits 5
 endObjectProperties
 
@@ -401,6 +401,26 @@ bgColor index 3
 useDisplayBg
 value {
   "Set Water Temperature"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 45
+y 175
+w 154
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "(must be in xx.xx format)"
 }
 autoSize
 endObjectProperties
