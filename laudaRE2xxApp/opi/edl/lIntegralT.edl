@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1304
-y 491
+x 937
+y 260
 w 450
 h 350
 font "helvetica-medium-r-18.0"
@@ -39,7 +39,7 @@ fontAlign "center"
 fgColor index 14
 bgColor index 73
 value {
-  "Lauda RE2xx - $(P)"
+  "Lauda Integral T - $(P)"
 }
 border
 endObjectProperties
@@ -70,7 +70,7 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 340
+x 385
 y 65
 w 45
 h 16
@@ -91,7 +91,7 @@ major 4
 minor 1
 release 0
 x 310
-y 300
+y 305
 w 120
 h 30
 fgColor index 46
@@ -152,7 +152,7 @@ major 4
 minor 1
 release 0
 x 10
-y 235
+y 247
 w 76
 h 16
 font "arial-bold-r-14.0"
@@ -172,7 +172,7 @@ major 10
 minor 0
 release 0
 x 90
-y 225
+y 235
 w 350
 h 40
 controlPv "$(P):COMMAND"
@@ -233,7 +233,7 @@ major 4
 minor 2
 release 0
 x 180
-y 300
+y 305
 w 120
 h 30
 fgColor index 25
@@ -254,35 +254,15 @@ beginObjectProperties
 major 4
 minor 0
 release 0
-x 350
-y 95
+x 395
+y 90
 w 30
-h 100
+h 140
 controlPv "$(P):STATUS"
 lineColor index 14
 onColor index 20
 offColor index 24
-numBits 5
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 220
-y 95
-w 127
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Over Temperature"
-}
-autoSize
+numBits 7
 endObjectProperties
 
 # (Static Text)
@@ -292,17 +272,16 @@ major 4
 minor 1
 release 0
 x 230
-y 115
-w 116
-h 16
+y 150
+w 145
+h 20
 font "arial-bold-r-14.0"
 fgColor index 10
 bgColor index 3
 useDisplayBg
 value {
-  "Water Low Level"
+  "Over Temperature"
 }
-autoSize
 endObjectProperties
 
 # (Static Text)
@@ -311,18 +290,17 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 240
-y 135
-w 104
-h 16
+x 230
+y 130
+w 80
+h 20
 font "arial-bold-r-14.0"
 fgColor index 10
 bgColor index 3
 useDisplayBg
 value {
-  "Pump Blocked"
+  "Low Level"
 }
-autoSize
 endObjectProperties
 
 # (Static Text)
@@ -331,18 +309,17 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 240
-y 155
-w 104
-h 16
+x 230
+y 110
+w 95
+h 20
 font "arial-bold-r-14.0"
 fgColor index 10
 bgColor index 3
 useDisplayBg
 value {
-  "Internal Fault 1"
+  "Pump Error"
 }
-autoSize
 endObjectProperties
 
 # (Static Text)
@@ -351,18 +328,36 @@ beginObjectProperties
 major 4
 minor 1
 release 0
-x 240
-y 175
-w 105
-h 16
+x 230
+y 170
+w 135
+h 20
 font "arial-bold-r-14.0"
 fgColor index 10
 bgColor index 3
 useDisplayBg
 value {
-  "Internal Fault 2"
+  "Refrigeration Unit"
 }
-autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 230
+y 190
+w 140
+h 20
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "No ext temp probe"
+}
 endObjectProperties
 
 # (Textentry)
@@ -445,5 +440,43 @@ controlPv "$(P):DISABLE"
 3d
 font "arial-bold-r-14.0"
 objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 230
+y 90
+w 95
+h 20
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Error (Exx)"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 230
+y 210
+w 160
+h 20
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Analogue Input Error"
+}
 endObjectProperties
 

@@ -33,6 +33,9 @@ DBD += laudaRE2xx.dbd
 
 # laudaRE2xx.dbd will be created from these files
 laudaRE2xx_DBD += base.dbd
+#laudaRE2xx_DBD += stream.dbd
+#laudaRE2xx_DBD += drvAsynSerialPort.dbd
+#laudaRE2xx_DBD += drvAsynIPPort.dbd
 #laudaRE2xx_DBD += xxx.dbd
 
 # laudaRE2xx_registerRecordDeviceDriver.cpp will be created
@@ -52,6 +55,8 @@ laudaRE2xx_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 # This line says that this IOC Application depends on the
 # xxx Support Module
 #laudaRE2xx_LIBS += xxx
+#laudaRE2xx_LIBS += asyn
+#laudaRE2xx_LIBS += stream
 
 # We need to link this IOC Application against the EPICS Base libraries
 laudaRE2xx_LIBS += $(EPICS_BASE_IOC_LIBS)
