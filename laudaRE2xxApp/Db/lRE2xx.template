@@ -9,15 +9,21 @@
 # Lauda Ecoline Staredition RE2xx template file.
 #
 # Macros:
-#   P - Prefix for PV name
-#   PORT - Bus/Port Address (eg. ASYN Port).
-#   ADDR - Address on the bus (optional)
-#   SCAN - SCAN rate for read parameters.
+# % macro,  P,    Prefix for PV name
+# % macro,  PORT, Bus/Port Address (eg. ASYN Port).
+# % macro,  ADDR, Address on the bus (optional)
+# % macro,  SCAN, SCAN rate for read parameters.
+# % macro,  HIHI, HIHI value for input temperature
+# % macro,  HIGH, HIGH value for input temperature
+# % macro,  LOW,  LOW value for input temperature
+# % macro,  LOLO, LOLO value for input temperature
+# % macro,  name, object and gui association name
 #
 # Notes:
 #   Temperature reading is handled by the alarm handler
 #
 ################################################################
+# % gui, $(name=), edm, lRE2xx.edl, P=$(P)
 ################################################################
 # Read records
 ################################################################
@@ -42,6 +48,24 @@ record(ai, "$(P):TEMP") {
   field(PREC, "2")
   field(HYST, "0.1")
   field(SDIS, "$(P):DISABLE")
+}
+
+# Read program status
+record(ai, "$(P):PROGRUNNING") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getProgRunning $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(FLNK, "$(P):RUNNING")
+  field(SDIS, "$(P):DISABLE")
+}
+
+record(calcout, "$(P):RUNNING") {
+  field(INPA, "$(P):PROGRUNNING")
+  field(CALC, "A>0")
+  field(OOPT, "When Zero")
+  field(DOPT, "Use OCAL")
+  field(OCAL, "0")
+  field(OUT, "$(P):BUSY CA")
 }
 
 # ///
@@ -82,6 +106,49 @@ record(ao, "$(P):SET_TEMP") {
   field(DESC, "Setpoint temperature")
   field(OUT, "@lRE2xx.proto setTemp $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
+}
+
+record(ao, "$(P):RTEMP") {
+  field(DESC, "Ramp temperature")
+  field(PREC, "2")
+  field(EGU, "C")
+  field(PINI, "YES")  
+}
+
+record(ao, "$(P):RRATE") {
+  field(DESC, "Ramp rate")
+  field(PINI, "YES")
+  field(PREC, "2")
+  field(EGU, "C/min")  
+  field(FLNK, "$(P):RTIME")
+}
+
+record(calc, "$(P):RTIME") {
+  field(INPA, "$(P):RRATE")
+  field(INPB, "$(P):TEMP CP")
+  field(INPC, "$(P):RTEMP")  
+  field(CALC, "(C-A)/B")  
+  field(DESC, "Ramp time")
+  field(EGU, "min")  
+  field(FLNK, "$(P):RTIME")
+}  
+
+record(ao, "$(P):START") {
+  field(DTYP, "stream")
+  field(DESC, "Start program")
+  field(OUT, "@lRE2xx.proto startProg($(P)) $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+  field(FLNK, "$(P):BUSY")
+}
+
+record(ao, "$(P):STOP") {
+  field(DTYP, "stream")
+  field(DESC, "Stop program")
+  field(OUT, "@lRE2xx.proto stopProg $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+}
+
+record(busy, "$(P):BUSY") {
 }
 
 #################################################################

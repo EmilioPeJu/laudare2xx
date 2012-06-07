@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<components arch="linux-x86">
+	<asyn.AsynIP name="lRE2xxAsyn" port="172.23.111.180:7001" simulation="localhost:9001"/>
+	<laudaRE2xx.lRE2xx ADDR="0" HIGH="180" HIHI="200" LOLO="-20" LOW="-15" P="TESTLAUDA" PORT="lRE2xxAsyn" SCAN="5"/>
+</components>

@@ -39,6 +39,12 @@ getStatus {
    in "%5d";
 }
 
+# /// Read program status
+getProgRunning {
+   ExtraInput = Ignore;
+   out "RMP_IN_05";
+   in "%1d";
+}
 
 ###################################################
 # Set functions
@@ -49,7 +55,19 @@ setTemp {
    out "OUT_SP_00_%.2f";
 }
 
+# /// Start a program running
+startProg {
+   out "RMP_RESET";
+   out "RMP_OUT_00_%(\$1:TEMP.VAL).2f_0.01";
+   out "RMP_OUT_00_%(\$1:RTEMP.VAL).2f_%(\$1:RTIME.VAL)d";   
+   out "RMP_OUT_02_1";
+   out "RMP_START";
+}
 
+# /// Stop a program running
+stopProg {
+   out "RMP_STOP";
+}
 
 #############################################################
 # Generic protocol
