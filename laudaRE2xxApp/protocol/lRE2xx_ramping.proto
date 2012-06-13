@@ -1,0 +1,81 @@
+##################################################
+#
+# Protocol File
+#
+# Protocol file for Lauda Ecoline Staredition RE2xx
+# Diamond Light Source, Oct 2008
+#
+# NOTES:
+#
+#
+#
+##################################################
+
+
+##################################################
+# General Settings
+##################################################
+
+Terminator = "\r\n";
+ReplyTimeout = 1000;
+
+
+###################################################
+# Get functions
+###################################################
+
+# /// Read water bath temperature
+getTemp {
+   ExtraInput = Ignore;
+   out "IN_PV_00";
+   in "%f";
+}
+
+# /// Read over temperature status
+getStatus {
+   ExtraInput = Ignore;
+   seperator = "";
+   out "STAT";
+   in "%5d";
+}
+
+# /// Read program status
+getProgRunning {
+   ExtraInput = Ignore;
+   out "RMP_IN_05";
+   in "%f";
+}
+
+###################################################
+# Set functions
+###################################################
+
+# /// Set the setpoint for water temperature (temperature must be specific format (up to 3 digits before decimal point and up to 2 digits after decimal point).
+setTemp {
+   out "OUT_SP_00_%.2f"; in "OK";
+}
+
+# /// Start a program running
+startProg {
+   out "RMP_RESET"; in "OK";
+   out "RMP_OUT_00_%(\$1:TEMP.VAL).2f_0.00"; in "OK";
+   out "RMP_OUT_00_%(\$1:RTEMP.VAL).2f_%(\$1:RTIME.VAL)d.00";    in "OK";
+   out "RMP_OUT_02_1"; in "OK";
+   out "RMP_START"; in "OK";
+}
+
+# /// Stop a program running
+stopProg {
+   out "RMP_STOP"; in "OK";
+}
+
+#############################################################
+# Generic protocol
+############################################################
+
+# /// Use this send any command and get back the response (max 39 chars).
+gen {
+    ExtraInput = Ignore;
+    out "%s";
+    in "%39c"
+}
