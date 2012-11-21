@@ -6,7 +6,7 @@ release 1
 x 1304
 y 491
 w 450
-h 469
+h 350
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -91,7 +91,7 @@ major 4
 minor 1
 release 0
 x 310
-y 435
+y 300
 w 120
 h 30
 fgColor index 46
@@ -124,7 +124,7 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 5
+minor 1
 release 0
 x 50
 y 95
@@ -143,7 +143,6 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
-noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -153,7 +152,7 @@ major 4
 minor 1
 release 0
 x 10
-y 370
+y 235
 w 76
 h 16
 font "arial-bold-r-14.0"
@@ -173,7 +172,7 @@ major 10
 minor 0
 release 0
 x 90
-y 360
+y 225
 w 350
 h 40
 controlPv "$(P):COMMAND"
@@ -189,10 +188,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 5
+minor 1
 release 0
 x 90
-y 410
+y 275
 w 350
 h 20
 controlPv "$(P):RESPONSE"
@@ -205,7 +204,6 @@ nullColor index 30
 useAlarmBorder
 newPos
 objType "monitors"
-noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -215,7 +213,7 @@ major 4
 minor 1
 release 0
 x 10
-y 410
+y 275
 w 72
 h 16
 font "arial-bold-r-14.0"
@@ -235,7 +233,7 @@ major 4
 minor 2
 release 0
 x 180
-y 435
+y 300
 w 120
 h 30
 fgColor index 25
@@ -315,7 +313,7 @@ minor 1
 release 0
 x 240
 y 135
-w 105
+w 104
 h 16
 font "arial-bold-r-14.0"
 fgColor index 10
@@ -447,234 +445,5 @@ controlPv "$(P):DISABLE"
 3d
 font "arial-bold-r-14.0"
 objType "controls"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 10
-y 220
-w 64
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Program"
-}
-autoSize
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 20
-y 325
-w 20
-h 20
-controlPv "$(P):RUNNING"
-lineColor index 14
-onColor index 15
-offColor index 19
-numBits 1
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 45
-y 320
-w 70
-h 30
-fgColor index 19
-onColor index 4
-offColor index 3
-topShadowColor index 1
-botShadowColor index 11
-controlPv "$(P):START.PROC"
-pressValue "1"
-onLabel "Start"
-offLabel "Start"
-3d
-font "arial-bold-r-14.0"
-endObjectProperties
-
-# (Message Button)
-object activeMessageButtonClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 120
-y 320
-w 70
-h 30
-fgColor index 24
-onColor index 4
-offColor index 3
-topShadowColor index 1
-botShadowColor index 11
-controlPv "$(P):STOP.PROC"
-pressValue "1"
-onLabel "Stop"
-offLabel "Stop"
-3d
-font "arial-bold-r-14.0"
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 25
-y 240
-w 89
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Temperature"
-}
-autoSize
-endObjectProperties
-
-# (Textentry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 25
-y 260
-w 105
-h 35
-controlPv "$(P):RTEMP"
-displayMode "decimal"
-precision 2
-fgColor index 25
-bgColor index 3
-fill
-font "helvetica-medium-r-12.0"
-lineWidth 0
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 145
-y 240
-w 77
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Ramp Rate"
-}
-autoSize
-endObjectProperties
-
-# (Textentry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 140
-y 260
-w 105
-h 35
-controlPv "$(P):RRATE"
-displayMode "decimal"
-precision 2
-fgColor index 25
-bgColor index 3
-fill
-font "helvetica-medium-r-12.0"
-lineWidth 0
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 20
-y 300
-w 127
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Program Running"
-}
-autoSize
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 5
-release 0
-x 255
-y 260
-w 125
-h 35
-controlPv "$(P):RTIME"
-format "float"
-font "helvetica-medium-r-10.0"
-fontAlign "center"
-fgColor index 16
-fgAlarm
-bgColor index 10
-limitsFromDb
-nullColor index 30
-showUnits
-useAlarmBorder
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 255
-y 240
-w 80
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Ramp Time"
-}
-autoSize
 endObjectProperties
 
