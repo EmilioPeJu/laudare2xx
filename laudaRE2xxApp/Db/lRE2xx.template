@@ -33,7 +33,7 @@
 # /// Read the water temperature.
 # ///
 #% archiver 10 Monitor
-#% alh $SEVRCOMMAND UP_ANY /dls_sw/tools/bin/dls-alh-handler.py $(P):TEMP
+#% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):TEMP
 record(ai, "$(P):TEMP") {
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
@@ -56,7 +56,7 @@ record(ai, "$(P):TEMP") {
 # /// Read the status bits.
 # ///
 #% archiver 10 Monitor
-#% alh $SEVRCOMMAND UP_ANY /dls_sw/tools/bin/dls-alh-handler.py $(P):STATUS
+#% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):STATUS
 record(ai, "$(P):STATUS") {
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getStatus $(PORT) $(ADDR)")
