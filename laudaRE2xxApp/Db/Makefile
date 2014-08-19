@@ -12,6 +12,7 @@ include $(TOP)/configure/CONFIG
 # templates like this
 #
 DB += lRE2xx.template
+DB += lRE2xx_RS485.template
 
 include $(TOP)/configure/RULES
 #----------------------------------------
