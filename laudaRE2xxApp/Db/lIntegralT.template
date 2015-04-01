@@ -6,7 +6,7 @@
 
 ################################################################
 #
-# Lauda Ecoline Staredition RE2xx template file.
+# Lauda Integral T template file.
 #
 # Macros:
 # % macro,  P,    Prefix for PV name
@@ -23,8 +23,8 @@
 #   Temperature reading is handled by the alarm handler
 #
 ################################################################
-# % gui, $(name=), edmembed, lRE2xx_embed.edl, P=$(P),EDM_FILE=lRE2xx.edl
-# % gui, $(name=), edm, EDM_FILE=lRE2xx.edl, P=$(P)
+# % gui, $(name=), edmembed, lRE2xx_embed.edl, P=$(P),EDM_FILE=lIntegralT.edl
+# % gui, $(name=), edm, lIntegralT.edl, P=$(P)
 ################################################################
 # Read records
 ################################################################
@@ -36,6 +36,29 @@
 record(ai, "$(P):TEMP") {
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(EGU, "C")
+  field(HIHI, "$(HIHI)")
+  field(HIGH, "$(HIGH)")
+  field(LOW, "$(LOW)")
+  field(LOLO, "$(LOLO)")
+  field(HHSV, "MAJOR")
+  field(HSV, "MINOR")
+  field(LSV, "MINOR")
+  field(LLSV, "MAJOR")
+  field(PREC, "2")
+  field(HYST, "0.1")
+  field(SDIS, "$(P):DISABLE")
+}
+
+################################################################
+# ///
+# /// Read the external pt100 temperature.
+# ///
+#% archiver 10 Monitor
+record(ai, "$(P):EXT_TEMP") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getExtTemp $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -64,6 +87,17 @@ record(ai, "$(P):STATUS") {
   field(HHSV, "MAJOR")
   field(HIHI, "1")
   field(SDIS, "$(P):DISABLE")
+}
+
+record(fanout, "$(P):STATUS:FAN") {
+  field(LNK1, "$(P):STATUS:B5")
+}
+
+# ///
+# /// Read the over temperature status bit
+# ///
+record(ai, "$(P):STATUS:B5") {
+  field(INP, "$(P):STATUS >> 4")
 }
 
 ################################################################

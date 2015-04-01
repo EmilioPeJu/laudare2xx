@@ -10,4 +10,12 @@ class lRE2xx(AutoSubstitution, AutoProtocol):
     # AutoProtocol attributes
     ProtocolFiles = ['lRE2xx.proto']
 
+class lIntegralT(AutoSubstitution, AutoProtocol):
+    Dependencies = (Busy,)
+    # Substitution attributes
+    TemplateFile = 'lIntegralT.template'
+
+    # AutoProtocol attributes
+    ProtocolFiles = ['lRE2xx.proto']
+
 

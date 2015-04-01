@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 937
-y 260
+x 1308
+y 162
 w 450
 h 350
 font "helvetica-medium-r-18.0"
@@ -29,7 +29,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 0
 y 0
 w 450
@@ -39,7 +39,7 @@ fontAlign "center"
 fgColor index 14
 bgColor index 73
 value {
-  "Lauda Integral T - $(P)"
+  "(Big) Lauda Integral T - $(P)"
 }
 border
 endObjectProperties
@@ -49,7 +49,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 10
 y 65
 w 134
@@ -69,7 +69,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 385
 y 65
 w 45
@@ -108,7 +108,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 70
 y 225
 w 2
@@ -124,10 +124,10 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 6
 release 0
 x 50
-y 95
+y 85
 w 130
 h 20
 controlPv "$(P):TEMP"
@@ -143,6 +143,7 @@ showUnits
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -150,7 +151,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 10
 y 247
 w 76
@@ -188,7 +189,7 @@ endObjectProperties
 object activeXTextDspClass:noedit
 beginObjectProperties
 major 4
-minor 1
+minor 6
 release 0
 x 90
 y 275
@@ -204,6 +205,7 @@ nullColor index 30
 useAlarmBorder
 newPos
 objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
 # (Static Text)
@@ -211,7 +213,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 10
 y 275
 w 72
@@ -230,7 +232,7 @@ endObjectProperties
 object shellCmdClass
 beginObjectProperties
 major 4
-minor 2
+minor 3
 release 0
 x 180
 y 305
@@ -270,7 +272,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 230
 y 150
 w 145
@@ -289,7 +291,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 230
 y 130
 w 80
@@ -308,7 +310,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 230
 y 110
 w 95
@@ -327,7 +329,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 230
 y 170
 w 135
@@ -346,7 +348,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 230
 y 190
 w 140
@@ -367,7 +369,7 @@ major 10
 minor 0
 release 0
 x 50
-y 145
+y 190
 w 130
 h 40
 controlPv "$(P):SET_TEMP"
@@ -385,9 +387,9 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 10
-y 125
+y 170
 w 160
 h 16
 font "arial-bold-r-14.0"
@@ -400,31 +402,11 @@ value {
 autoSize
 endObjectProperties
 
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 45
-y 190
-w 154
-h 16
-font "helvetica-medium-r-14.0"
-fgColor index 14
-bgColor index 3
-useDisplayBg
-value {
-  "(must be in xx.xx format)"
-}
-autoSize
-endObjectProperties
-
 # (Button)
 object activeButtonClass
 beginObjectProperties
 major 4
-minor 0
+minor 1
 release 0
 x 145
 y 40
@@ -447,7 +429,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 230
 y 90
 w 95
@@ -466,7 +448,7 @@ object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
+release 1
 x 230
 y 210
 w 160
@@ -478,5 +460,51 @@ useDisplayBg
 value {
   "Analogue Input Error"
 }
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 115
+w 151
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "External Temperature"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 50
+y 135
+w 130
+h 20
+controlPv "$(P):EXT_TEMP"
+format "float"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
 endObjectProperties
 
