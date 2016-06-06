@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1306
-y 516
+x 1308
+y 542
 w 450
-h 350
+h 465
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -91,7 +91,7 @@ major 4
 minor 1
 release 0
 x 310
-y 300
+y 425
 w 120
 h 30
 fgColor index 46
@@ -110,7 +110,7 @@ major 4
 minor 1
 release 1
 x 70
-y 225
+y 350
 w 2
 h 0
 font "helvetica-bold-r-14.0"
@@ -153,7 +153,7 @@ major 4
 minor 1
 release 1
 x 10
-y 235
+y 360
 w 76
 h 16
 font "arial-bold-r-14.0"
@@ -173,7 +173,7 @@ major 10
 minor 0
 release 0
 x 90
-y 225
+y 350
 w 350
 h 40
 controlPv "$(P):COMMAND"
@@ -192,7 +192,7 @@ major 4
 minor 6
 release 0
 x 90
-y 275
+y 400
 w 350
 h 20
 controlPv "$(P):RESPONSE"
@@ -215,7 +215,7 @@ major 4
 minor 1
 release 1
 x 10
-y 275
+y 400
 w 72
 h 16
 font "arial-bold-r-14.0"
@@ -235,7 +235,7 @@ major 4
 minor 3
 release 0
 x 180
-y 300
+y 425
 w 120
 h 30
 fgColor index 25
@@ -447,5 +447,157 @@ controlPv "$(P):DISABLE"
 3d
 font "arial-bold-r-14.0"
 objType "controls"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 325
+y 215
+w 82
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Water Level"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 295
+y 240
+w 130
+h 20
+controlPv "$(P):LEVEL"
+format "float"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 220
+w 78
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Pump level"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 50
+y 245
+w 130
+h 20
+controlPv "$(P):PUMP"
+format "float"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 50
+y 295
+w 130
+h 40
+controlPv "$(P):SET_PUMP"
+displayMode "decimal"
+precision 2
+fgColor index 25
+bgColor index 3
+fill
+font "helvetica-medium-r-12.0"
+lineWidth 0
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 275
+w 109
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Set Pump Level"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 185
+y 305
+w 46
+h 16
+font "helvetica-medium-r-14.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "(0 to 8)"
+}
+autoSize
 endObjectProperties
 

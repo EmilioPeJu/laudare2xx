@@ -65,6 +65,41 @@ record(ai, "$(P):TEMP") {
 }
 
 # ///
+# /// Read the water bath level (height above the minimum).
+# ///
+#% archiver 10 Monitor
+record(longin, "$(P):LEVELRAW") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getLevel $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(SDIS, "$(P):DISABLE")
+  field(FLNK, "$(P):LEVEL")
+}
+
+
+record(calc, "$(P):LEVEL") {
+  field(INPA, "$(P):LEVELRAW NPP MS")
+  field(CALC, "A*10")
+  field(EGU, "mm")
+  field(LOLO, "0")
+  field(LOW, "10")
+}
+
+
+# ///
+# /// Read the pump level (0-7)
+# ///
+record(longin, "$(P):PUMP") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getPump $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(LOW, "0")
+  field(LOLO, "-1")
+  field(HIHI, "9")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
 # /// Read the status bits.
 # ///
 #% archiver 10 Monitor
@@ -92,6 +127,20 @@ record(ao, "$(P):SET_TEMP") {
   field(OUT, "@lRE2xx.proto setTemp $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
+
+# ///
+# /// Set the pump level (integer from 0 to 7; 0 sets the unit to standby mode)
+# ///
+#% autosave 1 VAL
+record(longout, "$(P):SET_PUMP") {
+  field(DTYP, "stream")
+  field(DESC, "Set pump level")
+  field(OUT, "@lRE2xx.proto setPump $(PORT) $(ADDR)")
+  field(DRVH, "8")
+  field(DRVL, "0")
+  field(SDIS, "$(P):DISABLE")
+}
+
 
 #################################################################
 # Generic protocol PV, to send any command.

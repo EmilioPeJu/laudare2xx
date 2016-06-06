@@ -53,6 +53,20 @@ getProgRunning {
    in "%1d";
 }
 
+# /// Read water bath level
+getLevel {
+   ExtraInput = Ignore;
+   out "IN_PV_05";
+   in "%d";
+}
+
+# /// Read pump level (1 to 8)
+getPump {
+   ExtraInput = Ignore;
+   out "IN_SP_01";
+   in "%d";
+}
+
 ###################################################
 # Set functions
 ###################################################
@@ -60,6 +74,16 @@ getProgRunning {
 # /// Set the setpoint for water temperature (temperature must be specific format (up to 3 digits before decimal point and up to 2 digits after decimal point).
 setTemp {
    out "OUT_SP_00_%.2f";
+}
+
+# /// Set the pump level (0 to 8)
+setPump {
+   out "OUT_SP_01_%d";
+}
+
+# /// Set the cooling mode (0=OFF/1=ON/2=AUTOMATIC)
+setCoolingMode {
+   out "OUT_SP_02_%d";
 }
 
 # /// Start a program running
