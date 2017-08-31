@@ -6,7 +6,6 @@ DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard *App))
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard *app))
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard iocBoot))
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard iocboot))
-#DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard documentation))
 # Comment out the following lines to disable creation of example iocs and documentation
 DIRS := $(DIRS) $(filter-out $(DIRS), $(wildcard etc))
 
