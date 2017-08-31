@@ -1,13 +1,10 @@
 ##################################################
 #
-# Protocol File
-#
-# Protocol file for Lauda Ecoline Staredition RE2xx
-# Diamond Light Source, Oct 2008
-#
-# NOTES:
-#
-#
+# Protocol file for Lauda devices
+# Proline RP 855
+# ecoline silver RE415
+# ecoline gold RE1050W 
+# integral T4600 (beamline I22)
 #
 ##################################################
 
@@ -32,25 +29,27 @@ getTemp {
 }
 
 # /// Read external pt100 temperature
+# /// valid for ecoline and proline
 getExtTemp {
    ExtraInput = Ignore;
    out "IN_PV_03";
    in "%f";
 }
 
+# /// Read external pt100 temperature
+# /// valid for integral T model
+getExtTemp1 {
+   ExtraInput = Ignore;
+   out "IN_PV_01";
+   in "%f";
+}
+
 # /// Read over temperature status
 getStatus {
    ExtraInput = Ignore;
-   seperator = "";
+   Separator = "";
    out "STAT";
    in "%5d";
-}
-
-# /// Read program status
-getProgRunning {
-   ExtraInput = Ignore;
-   out "RMP_IN_05";
-   in "%1d";
 }
 
 # /// Read water bath level
@@ -79,25 +78,6 @@ setTemp {
 # /// Set the pump level (0 to 8)
 setPump {
    out "OUT_SP_01_%d";
-}
-
-# /// Set the cooling mode (0=OFF/1=ON/2=AUTOMATIC)
-setCoolingMode {
-   out "OUT_SP_02_%d";
-}
-
-# /// Start a program running
-startProg {
-   out "RMP_RESET";
-   out "RMP_OUT_00_%(\$1:TEMP.VAL).2f_0.01";
-   out "RMP_OUT_00_%(\$1:RTEMP.VAL).2f_%(\$1:RTIME.VAL)d";   
-   out "RMP_OUT_02_1";
-   out "RMP_START";
-}
-
-# /// Stop a program running
-stopProg {
-   out "RMP_STOP";
 }
 
 #############################################################
