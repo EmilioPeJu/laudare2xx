@@ -3,7 +3,7 @@
 
 \section rel2_2 Release 2-2 (Aug 2017)
 
-Add/fix external temperature monitoring (re Jira I22-544 - Ronaldo Mercado).
+Add/fix external temperature monitoring (addresses the first request in JIRA issue I22-544).
 Add/fix documentation.
 
 \section rel2_1 Release 2-1 (Aug 2016)
