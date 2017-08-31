@@ -6,7 +6,8 @@
 
 ################################################################
 #
-# Lauda Ecoline Staredition RE2xx template file.
+# Template file for lauda ecoline star edition, also valid for
+# ecoline silver, ecoline gold and proline devices
 #
 # Macros:
 # % macro,  P,    Prefix for PV name
