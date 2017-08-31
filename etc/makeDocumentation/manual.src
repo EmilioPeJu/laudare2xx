@@ -1,101 +1,131 @@
 /**
-\mainpage Lauda Ecoline Staredition RE2xx EPICS Support Module
-\section intro_sec Introduction
-9 July 2008
+\page release_notes Release Notes
 
-The laudaRE2xx support module provides an EPICS interface to the Lauda Ecoline Staredition RE2xx.
+\section rel2_2 Release 2-2 (Aug 2017)
 
-\subsection use_sec How to use this support module within an IOC application.
+Add/fix external temperature monitoring (re Jira I22-544 - Ronaldo Mercado).
+Add/fix documentation.
 
-This support module makes use of the EPICS ASYN and Streams extensions. Also needed are IPAC,
-HY8515 and UTILITY.
+\section rel2_1 Release 2-1 (Aug 2016)
 
-<ol>
-<li> Add a macro that points to the module in configure/RELEASE. The other modules
-need to be referenced too, e.g. 
-\verbatim
-    ASYN=		$(SUPPORT)/asyn/4-9
-    STREAM=		$(SUPPORT)/streamDevice/2-1dls4
-    KEITHLEY2400=	$(SUPPORT)/laudaRE2xx/X-X
-    IPAC=		$(SUPPORT)/ipac/2-8dls4-3
-    HY8515=		$(SUPPORT)/Hy8515/3-7
-    UTILITY=		$(SUPPORT)/utility/dls2-8
-    AUTOSAVE=           $(SUPPORT)/autosave/4-2-1dls1
-\endverbatim
-
-<li> Add the module DBD file to the list of DBD. e.g. in src/Makefile\n
-\verbatim
-
-    	example_DBD += lRE2xx.dbd
-
-    #Note that the module requires the following DBD files in addition to base.dbd
-    	example_DBD += base.dbd
-	example_DBD += asyn.dbd
-	example_DBD += stream.dbd
-	example_DBD += drvAsynSerialPort.dbd
-	example_DBD += drvAsynIPPort.dbd
-	example_DBD += lRE2xx.dbd
-	example_DBD += utility.dbd
-	example_DBD += drvIpac.dbd
-	example_DBD += Hy8515.dbd
-	example_DBD += Hy8001.dbd
-	example_DBD += asSupport.dbd
-\endverbatim
-
-<li> Also in src/Makefile add the following libraries:
-\verbatim
-    	example_LIBS += asyn
-    	example_LIBS += stream
-	example_LIBS += utility
-        example_LIBS += Ipac
-        example_LIBS += drvHy8515
-        example_LIBS += autosave
-\endverbatim
-
-<li> In the Db/Makefile, the following is needed:
-\verbatim
-    USES_TEMPLATE += $(LAUDARE2XX)/db/lRE2xx.template
-\endverbatim
-
-<li> In the IOC startup file, the following needs to be added:
-\verbatim
-    #Define protocol path
-    epicsEnvSet("STREAM_PROTOCOL_PATH", "$(LAUDARE2XX)/data/")
-\endverbatim
-
-For configuration of Hytec hardware and autosave, see the startup file in the example IOC provided with the support module.
-
-<li> In the substitution file (or spreadsheet), the template is instantiated like so:
-\verbatim
-    file lRE2xx.template
-    {
-      pattern {P, PORT, ADDR, SCAN}
-               {mp49:lRE2xx, ty_50_0, 0, 1}
-    }
-\endverbatim
-
-Where the ty_50_0 is the ASYN serial port. The SCAN parameter determins how frequently temperature is read.
-
-</ol>
+Add water bath level readout (proline devices) and pump level control (ecoline and proline). (Ed Warrick)
 
 **/
 
 /**
-\page build_sec Build Instructions
+\page communication Communication Setup
 
-The support module contains the following elements
-
-- laudaRE2xxApp\n
-  The actual EPICS support module to be used by an IOC application.\n
-  Build this module by simply running "make install"
-  
-
-- example\n
-  An EPICS IOC application that uses this laudaRE2xxApp\n
-  Build this module by simply running "make install"
-
+The software works with these serial port settings.
+<ul>
+<li>Bus type: RS-232
+<li>Bits: 8
+<li>Parity: None
+<li>Flow Contro: None
+<li>Baud rate: 9600
+</ul>
+For VME comms, the setup was a 8002+8515+Serial PIM and using a straight through serial cable.
 **/
 
+/**
+\page communication Communication Setup
+
+The software works with these serial port settings.
+<ul>
+<li>Bus type: RS-232
+<li>Bits: 8
+<li>Parity: None
+<li>Flow Contro: None
+<li>Baud rate: 9600
+</ul>
+For VME comms, the setup was a 8002+8515+Serial PIM and using a straight through serial cable.
+**/
+
+/**
+\page pvs Process Variables (PV) Names
+
+Read Only PVs
+<table>
+<tr><th>PV Name 
+<th>Description
+<tr><td>{P}:TEMP
+<td>Read the current water temperature (outflow)
+<tr><td>{P}:STATUS
+<td>Read the current status bits
+<tr><td>{P}:RESPONSE
+<td>Contains the response from the execution of the COMMAND PV 
+</table>
+
+
+Write Only PVs
+<table>
+<tr><th>PV Name<th>Description
+<tr><td>{P}:SET_TEMP
+<td>Use this PV to send a temperature setpoint request.
+<tr><td>{P}:COMMAND
+<td>Use this PV to send any command to the device (max 39 chars). If there is any response, it is placed in the RESPONSE PV.
+</table>
+
+**/
+/**
+\mainpage LaudaRE2xx EPICS Support Module
+August 2017<br>
+Ronaldo Mercado
+
+\section intro_sec Introduction
+
+This is the documentation for the 
+<a href="http://www.diamond.ac.uk">Diamond Light Source</a> <a href="http://www.aps.anl.gov/epics">EPICS</a> laudaRE2xx support
+module. This module was originally prepared by Matthew Pearson around
+2008 to support a lauda "eco" line device for beamline I19 and has
+been since adapted to support "pro" line and "Integral" devices used
+in other beamlines including I07, I13-1, I14, I22, I11 and I11-1.
+
+Contributors to the module include Tom Cobb, Ed Warrick, Alan Greer (RS485 templates) and Ronaldo Mercado.
+
+The module consists of a streamDevice protocol, EPICS database
+templates for the "pro" and "eco" line models (lRE2xx.template) and
+for the "Integral" models (lIntegral.template) along with EDM and CSS
+screens.
+
+The laudaRE2xx support module was developed for the Lauda Ecoline
+Staredition RE2xx and has subsequently been modified to support other
+model of water baths. It now provides an EPICS interface to the Lauda
+Ecoline Staredition RE2xx, Lauda Proline RP 8xx and Integral Txxxx
+water baths.
+
+This software support allows for simple control of temperature
+setpoint for the water baths and monitoring of the bath temperature -
+internal and with external probe.
+
+For the proline devices, it's possible to modify the pump setting and
+monitor the water bath level.
+
+\section documentation Further documentation links
+
+<ul>
+<li>\ref release_notes
+<li>\ref communication
+<li>\ref pvs
+</ul>
+
+\section references References
+
+<ul>
+<li><a href="http://diamvdocs13.diamond.ac.uk/TECHNICAL%20DIVISION%20(TEC)/Controls%20and%20Interlocks%20CTRL/Forms/AllItems.aspx?RootFolder=%2FTECHNICAL%20DIVISION%20%28TEC%29%2FControls%20and%20Interlocks%20CTRL%2FSupplier%20Documentation%2FLauda">User Manuals Folder (DLS Sharepoint)</a>
+Sharepoint folder containing manuals for RE (eco silver) series, RP
+(proline) series, Integral and RE (eco silver) collected from models
+in use in beamlines I22 and I11-1 as of August 2017
+<li><a href="http://www.lauda.de">Manufacturer's Web Site (lauda.de)</a>
+<li><a href="http://diamvdocs13.diamond.ac.uk/TECHNICAL%20DIVISION%20(TEC)/Controls%20and%20Interlocks%20CTRL/Requirements%20(REQ)/LaudaRE-requirements.doc">The orginal controls software requirements document.</a>
+</ul>
+\section future_work Future work
+
+I22 have requested to support ramping (issue I22-544)
+
+\section contact Reporting bugs
+Report bugs to the module maintainer, currently <a href="mailto:ronaldo.mercado@diamond.ac.uk">Ronaldo Mercado</a> (Aug 2017).
+
+**/
 
 /**
 \page add_sec How to add functionality to the module
