@@ -51,14 +51,14 @@ record(ai, "$(P):TEMP") {
   field(SDIS, "$(P):DISABLE")
 }
 
-################################################################
+# #########################################################
 # ///
 # /// Read the external pt100 temperature.
 # ///
-#% archiver 10 Monitor
+# % archiver 10 Monitor
 record(ai, "$(P):EXT_TEMP") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getExtTemp $(PORT) $(ADDR)")
+  field(INP, "@lRE2xx.proto getExtTemp1 $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -83,21 +83,9 @@ record(ai, "$(P):STATUS") {
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getStatus $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
-  field(FLNK, "$(P):STATUS:FAN")
   field(HHSV, "MAJOR")
   field(HIHI, "1")
   field(SDIS, "$(P):DISABLE")
-}
-
-record(fanout, "$(P):STATUS:FAN") {
-  field(LNK1, "$(P):STATUS:B5")
-}
-
-# ///
-# /// Read the over temperature status bit
-# ///
-record(ai, "$(P):STATUS:B5") {
-  field(INP, "$(P):STATUS >> 4")
 }
 
 ################################################################
@@ -147,22 +135,16 @@ record(bo, "$(P):DISABLE") {
 }
 
 #! Further lines contain data used by VisualDCT
-#! View(0,0,1.0)
+#! View(143,75,1.0)
 #! Record("$(P):TEMP",40,35,0,0,"$(P):TEMP")
 #! Field("$(P):TEMP.SDIS",16777215,1,"$(P):TEMP.SDIS")
 #! Link("$(P):TEMP.SDIS","$(P):DISABLE.VAL")
-#! Record("$(P):STATUS",40,346,0,0,"$(P):STATUS")
+#! Record("$(P):EXT_TEMP",720,395,0,0,"$(P):EXT_TEMP")
+#! Field("$(P):EXT_TEMP.SDIS",16777215,0,"$(P):EXT_TEMP.SDIS")
+#! Link("$(P):EXT_TEMP.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):STATUS",40,480,0,0,"$(P):STATUS")
 #! Field("$(P):STATUS.SDIS",16777215,1,"$(P):STATUS.SDIS")
 #! Link("$(P):STATUS.SDIS","$(P):DISABLE.VAL")
-#! Field("$(P):STATUS.FLNK",16777215,1,"$(P):STATUS.FLNK")
-#! Link("$(P):STATUS.FLNK","$(P):STATUS:FAN")
-#! Field("$(P):STATUS.VAL",16777215,1,"$(P):STATUS.VAL")
-#! Record("$(P):STATUS:FAN",340,430,0,0,"$(P):STATUS:FAN")
-#! Field("$(P):STATUS:FAN.LNK1",16777215,1,"$(P):STATUS:FAN.LNK1")
-#! Link("$(P):STATUS:FAN.LNK1","$(P):STATUS:B5")
-#! Record("$(P):STATUS:B5",600,470,0,0,"$(P):STATUS:B5")
-#! Field("$(P):STATUS:B5.INP",16777215,0,"$(P):STATUS:B5.INP")
-#! Link("$(P):STATUS:B5.INP","$(P):STATUS.VAL")
 #! Record("$(P):SET_TEMP",280,28,0,0,"$(P):SET_TEMP")
 #! Field("$(P):SET_TEMP.SDIS",16777215,1,"$(P):SET_TEMP.SDIS")
 #! Link("$(P):SET_TEMP.SDIS","$(P):DISABLE.VAL")
