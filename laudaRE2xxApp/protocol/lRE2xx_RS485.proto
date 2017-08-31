@@ -32,7 +32,7 @@ getTemp {
 # /// Read over temperature status
 getStatus {
    ExtraInput = Ignore;
-   seperator = "";
+   Separator = "";
    out "\$1_STAT\r";
    in "\$1_STAT\r\$1_%7d\r";
 }
