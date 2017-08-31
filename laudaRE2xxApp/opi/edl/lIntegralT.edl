@@ -246,7 +246,7 @@ font "helvetica-medium-r-18.0"
 buttonLabel "HELP"
 numCmds 1
 command {
-  0 "firefox $(laudaRE2xxPath)/documentation/UserGuide/html/t1.html $(laudaRE2xxPath)/documentation/ProgrammerGuide/html/index.html &"
+  0 "firefox $(which lRE2xx.edl | sed \"s|data/lRE2xx.edl|documentation/index.html|\")&"
 }
 endObjectProperties
 
