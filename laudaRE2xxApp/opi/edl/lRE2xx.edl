@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1308
-y 542
-w 450
-h 465
+x 611
+y 196
+w 496
+h 410
 font "helvetica-medium-r-18.0"
 ctlFont "helvetica-medium-r-18.0"
 btnFont "helvetica-medium-r-18.0"
@@ -32,14 +32,14 @@ minor 1
 release 1
 x 0
 y 0
-w 450
+w 495
 h 40
 font "arial-bold-r-18.0"
 fontAlign "center"
 fgColor index 14
 bgColor index 73
 value {
-  "(Little) Lauda RE2xx - $(P)"
+  "Lauda Eco/Proline - $(P)"
 }
 border
 endObjectProperties
@@ -70,45 +70,6 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 340
-y 65
-w 45
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Status"
-}
-autoSize
-endObjectProperties
-
-# (Exit Button)
-object activeExitButtonClass
-beginObjectProperties
-major 4
-minor 1
-release 0
-x 310
-y 425
-w 120
-h 30
-fgColor index 46
-bgColor index 3
-topShadowColor index 1
-botShadowColor index 11
-label "EXIT"
-font "arial-medium-r-18.0"
-3d
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
 x 70
 y 350
 w 2
@@ -126,8 +87,8 @@ beginObjectProperties
 major 4
 minor 6
 release 0
-x 50
-y 95
+x 165
+y 65
 w 130
 h 20
 controlPv "$(P):TEMP"
@@ -146,235 +107,14 @@ objType "monitors"
 noExecuteClipMask
 endObjectProperties
 
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 360
-w 76
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Command"
-}
-autoSize
-endObjectProperties
-
 # (Textentry)
 object TextentryClass
 beginObjectProperties
 major 10
 minor 0
 release 0
-x 90
-y 350
-w 350
-h 40
-controlPv "$(P):COMMAND"
-displayMode "decimal"
-precision 6
-fgColor index 25
-bgColor index 3
-fill
-font "helvetica-medium-r-12.0"
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 6
-release 0
-x 90
-y 400
-w 350
-h 20
-controlPv "$(P):RESPONSE"
-font "helvetica-medium-r-10.0"
-fontAlign "center"
-fgColor index 16
-fgAlarm
-bgColor index 10
-nullColor index 30
-useAlarmBorder
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 400
-w 72
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Response"
-}
-autoSize
-endObjectProperties
-
-# (Shell Command)
-object shellCmdClass
-beginObjectProperties
-major 4
-minor 3
-release 0
-x 180
-y 425
-w 120
-h 30
-fgColor index 25
-bgColor index 3
-topShadowColor index 1
-botShadowColor index 11
-font "helvetica-medium-r-18.0"
-buttonLabel "HELP"
-numCmds 1
-command {
-  0 "firefox $(laudaRE2xxPath)/documentation/UserGuide/html/t1.html $(laudaRE2xxPath)/documentation/ProgrammerGuide/html/index.html &"
-}
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 350
-y 95
-w 30
-h 100
-controlPv "$(P):STATUS"
-lineColor index 14
-onColor index 20
-offColor index 24
-numBits 5
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 220
-y 95
-w 127
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Over Temperature"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 230
-y 115
-w 116
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Water Low Level"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 240
-y 135
-w 105
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Pump Blocked"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 240
-y 155
-w 104
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Internal Fault 1"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 240
-y 175
-w 105
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Internal Fault 2"
-}
-autoSize
-endObjectProperties
-
-# (Textentry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 50
-y 145
+x 175
+y 125
 w 130
 h 40
 controlPv "$(P):SET_TEMP"
@@ -413,8 +153,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 45
-y 190
+x 170
+y 170
 w 154
 h 16
 font "helvetica-medium-r-14.0"
@@ -455,16 +195,17 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 325
-y 215
-w 82
-h 16
+x 10
+y 260
+w 96
+h 32
 font "arial-bold-r-14.0"
 fgColor index 10
 bgColor index 3
 useDisplayBg
 value {
-  "Water Level"
+  "Water Level "
+  "(Proline only)"
 }
 autoSize
 endObjectProperties
@@ -475,8 +216,8 @@ beginObjectProperties
 major 4
 minor 6
 release 0
-x 295
-y 240
+x 160
+y 265
 w 130
 h 20
 controlPv "$(P):LEVEL"
@@ -502,7 +243,7 @@ major 4
 minor 1
 release 1
 x 10
-y 220
+y 195
 w 78
 h 16
 font "arial-bold-r-14.0"
@@ -521,8 +262,8 @@ beginObjectProperties
 major 4
 minor 6
 release 0
-x 50
-y 245
+x 165
+y 195
 w 130
 h 20
 controlPv "$(P):PUMP"
@@ -547,8 +288,8 @@ beginObjectProperties
 major 10
 minor 0
 release 0
-x 50
-y 295
+x 165
+y 220
 w 130
 h 40
 controlPv "$(P):SET_PUMP"
@@ -568,7 +309,7 @@ major 4
 minor 1
 release 1
 x 10
-y 275
+y 225
 w 109
 h 16
 font "arial-bold-r-14.0"
@@ -587,8 +328,8 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 185
-y 305
+x 300
+y 225
 w 46
 h 16
 font "helvetica-medium-r-14.0"
@@ -597,6 +338,329 @@ bgColor index 3
 useDisplayBg
 value {
   "(0 to 8)"
+}
+autoSize
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 315
+y 65
+w 165
+h 130
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 436
+y 65
+w 45
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Status"
+}
+autoSize
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 446
+y 95
+w 30
+h 100
+controlPv "$(P):STATUS"
+lineColor index 14
+onColor index 20
+offColor index 24
+numBits 5
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 316
+y 95
+w 127
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Over Temperature"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 326
+y 115
+w 116
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Water Low Level"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 336
+y 135
+w 105
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Pump Blocked"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 336
+y 155
+w 104
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Internal Fault 1"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 336
+y 175
+w 105
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Internal Fault 2"
+}
+autoSize
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 165
+y 90
+w 130
+h 20
+controlPv "$(P):EXT_TEMP"
+format "float"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 95
+w 151
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "External Temperature"
+}
+autoSize
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 308
+y 372
+w 120
+h 30
+fgColor index 46
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+label "EXIT"
+font "arial-medium-r-18.0"
+3d
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 180
+y 370
+w 120
+h 30
+fgColor index 25
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "helvetica-medium-r-18.0"
+buttonLabel "HELP"
+numCmds 1
+command {
+  0 "firefox $(which lRE2xx.edl | sed \"s|data/lRE2xx.edl|documentation/index.html|\")&"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 88
+y 347
+w 350
+h 20
+controlPv "$(P):RESPONSE"
+font "helvetica-medium-r-10.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+nullColor index 30
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 347
+w 72
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Response"
+}
+autoSize
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 88
+y 297
+w 350
+h 40
+controlPv "$(P):COMMAND"
+displayMode "decimal"
+precision 6
+fgColor index 25
+bgColor index 3
+fill
+font "helvetica-medium-r-12.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 8
+y 307
+w 76
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Command"
 }
 autoSize
 endObjectProperties
