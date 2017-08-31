@@ -1,0 +1,4 @@
+Maintainer notes
+
+Before making a release write release notes in etc/makeDocumentation/manual.src
+
