@@ -48,7 +48,13 @@ Read Only PVs
 <tr><th>PV Name 
 <th>Description
 <tr><td>{P}:TEMP
-<td>Read the current water temperature (outflow)
+<td>Read the bath temperature (outflow temperature) - uses the IN_PV_00 command
+<tr><td>{P}:EXT_TEMP
+<td>Read external temperature (T_E) - uses the IN_PV_03 (ecoline/proline) or IN_PV_01 (Integral)
+<tr><td>{P}:LEVEL
+<td>Read bath level - uses the IN_PV_05 command (proline only)
+<tr><td>{P}:PUMP
+<td>Read the current pump power stage (IN_SP_01 command, proline only)
 <tr><td>{P}:STATUS
 <td>Read the current status bits
 <tr><td>{P}:RESPONSE
@@ -60,9 +66,11 @@ Write Only PVs
 <table>
 <tr><th>PV Name<th>Description
 <tr><td>{P}:SET_TEMP
-<td>Use this PV to send a temperature setpoint request.
+<td>PV to send a temperature setpoint request.
 <tr><td>{P}:COMMAND
 <td>Use this PV to send any command to the device (max 39 chars). If there is any response, it is placed in the RESPONSE PV.
+<tr><td>{P}:DISABLE
+<td>PV to disable the EPICS records polling.
 </table>
 
 **/
@@ -84,7 +92,7 @@ Contributors to the module include Tom Cobb, Ed Warrick, Alan Greer (RS485 templ
 
 The module consists of a streamDevice protocol, EPICS database
 templates for the "pro" and "eco" line models (lRE2xx.template) and
-for the "Integral" models (lIntegral.template) along with EDM and CSS
+for the "Integral" models (lIntegralT.template) along with EDM and CSS
 screens.
 
 The laudaRE2xx support module was developed for the Lauda Ecoline
@@ -99,6 +107,13 @@ internal and with external probe.
 
 For the proline devices, it's possible to modify the pump setting and
 monitor the water bath level.
+
+\section rs485_support RS485 support
+
+RS485 support was added by Alan Greer in 2014 for beamline I04 because
+of cable lengths involved. Alan had to get termination resistors put
+into the connectors for it to work properly. I04's unit was removed in
+June 2016.
 
 \section documentation Further documentation links
 
