@@ -37,7 +37,7 @@
 #% alh $SEVRCOMMAND UP_ANY /dls_sw/tools/bin/dls-alh-handler.py $(P):TEMP
 record(ai, "$(P):TEMP") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx_RS485.proto getTemp($(RSAD)) $(PORT) $(ADDR)")
+  field(INP, "@lRE2xx_RS485.proto getTempA($(RSAD)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -60,7 +60,7 @@ record(ai, "$(P):TEMP") {
 #% alh $SEVRCOMMAND UP_ANY /dls_sw/tools/bin/dls-alh-handler.py $(P):STATUS
 record(ai, "$(P):STATUS") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx_RS485.proto getStatus($(RSAD)) $(PORT) $(ADDR)")
+  field(INP, "@lRE2xx_RS485.proto getStatusA($(RSAD)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(FLNK, "$(P):STATUS:FAN")
   field(HHSV, "MAJOR")
@@ -89,7 +89,7 @@ record(ai, "$(P):STATUS:B5") {
 record(ao, "$(P):SET_TEMP") {
   field(DTYP, "stream")
   field(DESC, "Setpoint temperature")
-  field(OUT, "@lRE2xx_RS485.proto setTemp($(RSAD)) $(PORT) $(ADDR)")
+  field(OUT, "@lRE2xx_RS485.proto setTempA($(RSAD)) $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -102,7 +102,7 @@ record(ao, "$(P):SET_TEMP") {
 record(stringin, "$(P):RESPONSE") {
   field(DTYP, "stream")
   field(DESC, "Command string response.")
-  field(INP, "@lRE2xx_RS485.proto gen $(PORT) $(ADDR)")
+  field(INP, "@lRE2xx_RS485.proto genA $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
