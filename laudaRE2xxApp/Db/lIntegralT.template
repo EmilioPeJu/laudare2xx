@@ -71,6 +71,19 @@ record(ai, "$(P):EXT_TEMP") {
 }
 
 # ///
+# /// Read temperature setpoint (read back of setTemp)
+# ///
+# % archiver 10 Monitor
+record(ai, "$(P):SET_TEMP:RBV") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getTempReadback $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(EGU, "C")
+  field(PREC, "2")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
 # /// Read the status bits.
 # ///
 #% archiver 10 Monitor
