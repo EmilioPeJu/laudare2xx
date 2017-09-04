@@ -188,6 +188,20 @@ record(ai, "$(P):EXT_TEMP") {
   field(SDIS, "$(P):DISABLE")
 }
 
+# ///
+# /// Read temperature setpoint (read back of setTemp)
+# ///
+# % archiver 10 Monitor
+record(ai, "$(P):SET_TEMP:RBV") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getTempReadback $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(EGU, "C")
+  field(PREC, "2")
+  field(SDIS, "$(P):DISABLE")
+}
+
+
 #! Further lines contain data used by VisualDCT
 #! View(0,0,1.0)
 #! Record("$(P):TEMP",40,35,0,0,"$(P):TEMP")
