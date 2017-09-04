@@ -1,6 +1,14 @@
 /**
 \page release_notes Release Notes
 
+\section rel2_3 Release 2-3 (Sep 2017)
+
+Documentation updates. Renamed the RS485 streamDevice functions with
+the suffix "A" to differentiate in the auto generated doxygen
+documentation.
+
+Add record for temp setpoint readback re jira I22-545
+
 \section rel2_2 Release 2-2 (Aug 2017)
 
 Add/fix external temperature monitoring (addresses the first request in JIRA issue I22-544).
@@ -43,34 +51,49 @@ For VME comms, the setup was a 8002+8515+Serial PIM and using a straight through
 /**
 \page pvs Process Variables (PV) Names
 
+The section below lists the EPICS PVs (records)
+
 Read Only PVs
 <table>
-<tr><th>PV Name 
+<tr><th>EPICS record name
 <th>Description
+<th>function in protocol
 <tr><td>{P}:TEMP
-<td>Read the bath temperature (outflow temperature) - uses the IN_PV_00 command
+<td>Read the bath temperature (outflow temperature)
+<td> \ref getTemp or \ref getTempA (RS485)
 <tr><td>{P}:EXT_TEMP
-<td>Read external temperature (T_E) - uses the IN_PV_03 (ecoline/proline) or IN_PV_01 (Integral)
+<td>Read external temperature (T_E)
+<td> \ref getExtTemp (proline/ecoline) or \ref getExtTemp1 (Integral)
 <tr><td>{P}:LEVEL
-<td>Read bath level - uses the IN_PV_05 command (proline only)
+<td>Read bath level
+<td> \ref getLevel (proline only)
 <tr><td>{P}:PUMP
-<td>Read the current pump power stage (IN_SP_01 command, proline only)
+<td>Read the current pump power stage
+<td> \ref getPump (proline only)
+<tr><td>{P}:SET_TEMP:RBV
+<td>Setpoint temperature read back value.
+<td> \ref getTempReadback
 <tr><td>{P}:STATUS
 <td>Read the current status bits
+<td> \ref getStatus or \ref getStatusA (RS485)
 <tr><td>{P}:RESPONSE
-<td>Contains the response from the execution of the COMMAND PV 
+<td>Contains the response from the execution of the COMMAND PV
+<td> \ref gen or \ref genA (RS485)
 </table>
 
 
 Write Only PVs
 <table>
-<tr><th>PV Name<th>Description
+<tr><th>PV Name<th>Description<th>Function in protocol
 <tr><td>{P}:SET_TEMP
 <td>PV to send a temperature setpoint request.
+<td>\ref setTemp or \ref setTempA (RS485)
 <tr><td>{P}:COMMAND
 <td>Use this PV to send any command to the device (max 39 chars). If there is any response, it is placed in the RESPONSE PV.
+<td>N/A
 <tr><td>{P}:DISABLE
 <td>PV to disable the EPICS records polling.
+<td>N/A
 </table>
 
 **/
@@ -81,7 +104,7 @@ Ronaldo Mercado
 
 \section intro_sec Introduction
 
-This is the documentation for the 
+This is the documentation for the
 <a href="http://www.diamond.ac.uk">Diamond Light Source</a> <a href="http://www.aps.anl.gov/epics">EPICS</a> laudaRE2xx support
 module. This module was originally prepared by Matthew Pearson around
 2008 to support a lauda "eco" line device for beamline I19 and has
@@ -145,7 +168,7 @@ Report bugs to the module maintainer, currently <a href="mailto:ronaldo.mercado@
 /**
 \page add_sec How to add functionality to the module
 
-To add more functionality to this support module (by adding support for more Lauda RE2xx  commands), 
+To add more functionality to this support module (by adding support for more Lauda RE2xx  commands),
 the following files must be edited:
 
 - laudaRE2xxApp/protocol/lRE2xx.proto\n
@@ -159,6 +182,6 @@ the following files must be edited:
 
 Upgrades:
 
-- 
+-
 
 **/
