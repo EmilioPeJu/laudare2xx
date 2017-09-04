@@ -1,4 +1,7 @@
 Maintainer notes
 
-Before making a release write release notes in etc/makeDocumentation/manual.src
-
+Before making a release 
+1. write release notes in etc/makeDocumentation/manual.src
+2. update release for documentation main page (label "\mainpage" in manual.src)
+   e.g. Release 2-3 September 2017<br>
+ 
