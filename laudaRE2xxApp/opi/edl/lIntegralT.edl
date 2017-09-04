@@ -3,13 +3,13 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1308
-y 162
+x 1331
+y 693
 w 450
 h 350
-font "helvetica-medium-r-18.0"
-ctlFont "helvetica-medium-r-18.0"
-btnFont "helvetica-medium-r-18.0"
+font "arial-medium-r-18.0"
+ctlFont "arial-medium-r-18.0"
+btnFont "arial-medium-r-18.0"
 fgColor index 14
 bgColor index 3
 textColor index 14
@@ -132,7 +132,7 @@ w 130
 h 20
 controlPv "$(P):TEMP"
 format "float"
-font "helvetica-medium-r-10.0"
+font "arial-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
 fgAlarm
@@ -182,7 +182,7 @@ precision 6
 fgColor index 25
 bgColor index 3
 fill
-font "helvetica-medium-r-12.0"
+font "arial-medium-r-12.0"
 endObjectProperties
 
 # (Text Monitor)
@@ -196,7 +196,7 @@ y 275
 w 350
 h 20
 controlPv "$(P):RESPONSE"
-font "helvetica-medium-r-10.0"
+font "arial-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
 fgAlarm
@@ -242,7 +242,7 @@ fgColor index 25
 bgColor index 3
 topShadowColor index 1
 botShadowColor index 11
-font "helvetica-medium-r-18.0"
+font "arial-medium-r-18.0"
 buttonLabel "HELP"
 numCmds 1
 command {
@@ -362,46 +362,6 @@ value {
 }
 endObjectProperties
 
-# (Textentry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 50
-y 190
-w 130
-h 40
-controlPv "$(P):SET_TEMP"
-displayMode "decimal"
-precision 2
-fgColor index 25
-bgColor index 3
-fill
-font "helvetica-medium-r-12.0"
-lineWidth 0
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 170
-w 160
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Set Water Temperature"
-}
-autoSize
-endObjectProperties
-
 # (Button)
 object activeButtonClass
 beginObjectProperties
@@ -494,7 +454,7 @@ w 130
 h 20
 controlPv "$(P):EXT_TEMP"
 format "float"
-font "helvetica-medium-r-10.0"
+font "arial-medium-r-12.0"
 fontAlign "center"
 fgColor index 16
 fgAlarm
@@ -506,5 +466,71 @@ useAlarmBorder
 newPos
 objType "monitors"
 noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 165
+w 160
+h 16
+font "arial-bold-r-14.0"
+fgColor index 10
+bgColor index 3
+useDisplayBg
+value {
+  "Set Water Temperature"
+}
+autoSize
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 121
+y 185
+w 100
+h 30
+controlPv "$(P):SET_TEMP:RBV"
+format "float"
+font "arial-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Textentry)
+object TextentryClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 16
+y 185
+w 100
+h 30
+controlPv "$(P):SET_TEMP"
+displayMode "decimal"
+precision 2
+fgColor index 25
+bgColor index 3
+fill
+font "arial-medium-r-14.0"
+lineWidth 0
 endObjectProperties
 
