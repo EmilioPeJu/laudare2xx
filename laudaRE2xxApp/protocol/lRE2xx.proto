@@ -2,6 +2,7 @@
 #
 # Protocol file for Lauda devices
 # Proline RP 855
+# Proline RP 890
 # ecoline silver RE415
 # ecoline gold RE1050W 
 # integral T4600 (beamline I22)
@@ -35,6 +36,8 @@ getExtTemp {
    ExtraInput = Ignore;
    out "IN_PV_03";
    in "%f";
+   # Parse error status
+   @mismatch{in "%(\$1:ERROR)s";}
 }
 
 # /// Read external pt100 temperature using the in_pv_01 command,
