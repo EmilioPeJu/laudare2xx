@@ -61,6 +61,8 @@ getLevel {
    ExtraInput = Ignore;
    out "IN_PV_05";
    in "%d";
+   # Parse error status
+   @mismatch{in "%(\$1:ERROR)s";}
 }
 
 # /// Read pump level (1 to 8)
