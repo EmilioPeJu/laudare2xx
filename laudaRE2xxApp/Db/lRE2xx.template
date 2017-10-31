@@ -65,7 +65,7 @@ record(ai, "$(P):TEMP") {
 #% archiver 10 Monitor
 record(longin, "$(P):LEVELRAW") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getLevel $(PORT) $(ADDR)")
+  field(INP, "@lRE2xx.proto getLevel($(P)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(SDIS, "$(P):DISABLE")
   field(FLNK, "$(P):LEVEL")
