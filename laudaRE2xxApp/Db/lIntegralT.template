@@ -54,7 +54,7 @@ record(ai, "$(P):TEMP") {
 # % archiver 10 Monitor
 record(ai, "$(P):EXT_TEMP") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getExtTemp1 $(PORT) $(ADDR)")
+  field(INP, "@lRE2xx.proto getExtTemp1($(P)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -141,6 +141,13 @@ record(bo, "$(P):DISABLE") {
   field(OMSL, "supervisory")
   field(ZNAM, "Enabled")
   field(ONAM, "Disabled")
+}
+
+#################################################################
+# Error status (From protocol mismatch)
+#################################################################
+record(stringin, "$(P):ERROR") {
+  field(DESC, "Error response")
 }
 
 #! Further lines contain data used by VisualDCT
