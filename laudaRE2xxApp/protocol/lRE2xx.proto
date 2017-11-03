@@ -46,6 +46,8 @@ getExtTemp1 {
    ExtraInput = Ignore;
    out "IN_PV_01";
    in "%f";
+   # Parse error status
+   @mismatch{in "%(\$1:ERROR)s";}
 }
 
 # /// Read error diagnosis response, using the "stat" command
