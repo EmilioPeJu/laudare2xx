@@ -105,3 +105,45 @@ gen {
     out "%s";
     in "%39c"
 }
+
+selectProg {
+    out "RMP_SELECT_%d";
+    in "%39c";
+}
+
+clearProg {
+    out "RMP_RESET";
+    in "%39c";
+}
+
+setRepeat {
+    out "RMP_OUT_02_%03d";
+    in "%39c";
+}
+
+getSegment {
+    out "RMP_IN_01";
+    in "%d";
+}
+getTotalRuns {
+    out "RMP_IN_02";
+    in "%d";
+}
+getRunNumber {
+    out "RMP_IN_03";
+    in "%d";
+}
+getSelectedProg {
+    out "RMP_IN_04";
+    in "%d";
+}
+getProgRunning {
+    out "RMP_IN_05";
+    in "%d";
+}
+
+setStep {
+    out "RMP_OUT_00_%(\$1:TEMP).2f_%(\$1:TIME)03d";
+    in "OK";
+    @mismatch{in "%(\$1:SERROR)s";}
+}
