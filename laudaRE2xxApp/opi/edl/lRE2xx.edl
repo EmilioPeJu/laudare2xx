@@ -3,10 +3,10 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 829
-y 660
-w 496
-h 410
+x 362
+y 210
+w 360
+h 500
 font "arial-medium-r-18.0"
 ctlFont "arial-medium-r-18.0"
 btnFont "arial-medium-r-18.0"
@@ -32,7 +32,7 @@ minor 1
 release 1
 x 0
 y 0
-w 495
+w 360
 h 40
 font "arial-bold-r-18.0"
 fontAlign "center"
@@ -44,118 +44,15 @@ value {
 border
 endObjectProperties
 
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 65
-w 134
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Water Temperature"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 70
-y 350
-w 2
-h 0
-font "helvetica-bold-r-14.0"
-fgColor index 11
-bgColor index 3
-useDisplayBg
-autoSize
-endObjectProperties
-
-# (Text Monitor)
-object activeXTextDspClass:noedit
-beginObjectProperties
-major 4
-minor 6
-release 0
-x 165
-y 65
-w 130
-h 20
-controlPv "$(P):TEMP"
-format "float"
-font "arial-medium-r-12.0"
-fontAlign "center"
-fgColor index 16
-fgAlarm
-bgColor index 10
-limitsFromDb
-nullColor index 30
-showUnits
-useAlarmBorder
-newPos
-objType "monitors"
-noExecuteClipMask
-endObjectProperties
-
-# (Textentry)
-object TextentryClass
-beginObjectProperties
-major 10
-minor 0
-release 0
-x 90
-y 145
-w 100
-h 30
-controlPv "$(P):SET_TEMP"
-displayMode "decimal"
-precision 2
-fgColor index 25
-bgColor index 3
-fill
-font "arial-medium-r-12.0"
-lineWidth 0
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 10
-y 125
-w 160
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Set Water Temperature"
-}
-autoSize
-endObjectProperties
-
 # (Button)
 object activeButtonClass
 beginObjectProperties
 major 4
 minor 1
 release 0
-x 145
-y 40
-w 160
+x 15
+y 75
+w 75
 h 20
 fgColor index 25
 onColor index 20
@@ -175,45 +72,36 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 10
-y 260
-w 96
-h 32
+x 5
+y 50
+w 120
+h 20
 font "arial-bold-r-14.0"
-fgColor index 10
+fgColor index 14
 bgColor index 3
 useDisplayBg
 value {
-  "Water Level "
-  "(Proline only)"
+  "Communication"
 }
-autoSize
 endObjectProperties
 
-# (Text Monitor)
-object activeXTextDspClass:noedit
+# (Static Text)
+object activeXTextClass
 beginObjectProperties
 major 4
-minor 6
-release 0
-x 160
-y 265
-w 130
+minor 1
+release 1
+x 5
+y 160
+w 120
 h 20
-controlPv "$(P):LEVEL"
-format "float"
-font "arial-medium-r-12.0"
-fontAlign "center"
-fgColor index 16
-fgAlarm
-bgColor index 10
-limitsFromDb
-nullColor index 30
-showUnits
-useAlarmBorder
-newPos
-objType "monitors"
-noExecuteClipMask
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Temperatures"
+}
 endObjectProperties
 
 # (Static Text)
@@ -223,17 +111,16 @@ major 4
 minor 1
 release 1
 x 10
-y 195
-w 78
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
+y 185
+w 85
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
 bgColor index 3
 useDisplayBg
 value {
-  "Pump level"
+  "Water setpoint"
 }
-autoSize
 endObjectProperties
 
 # (Text Monitor)
@@ -242,11 +129,11 @@ beginObjectProperties
 major 4
 minor 6
 release 0
-x 165
-y 195
-w 130
+x 210
+y 185
+w 105
 h 20
-controlPv "$(P):PUMP"
+controlPv "$(P):SET_TEMP:RBV"
 format "float"
 font "arial-medium-r-12.0"
 fontAlign "center"
@@ -268,11 +155,11 @@ beginObjectProperties
 major 10
 minor 0
 release 0
-x 165
-y 220
-w 130
-h 40
-controlPv "$(P):SET_PUMP"
+x 100
+y 185
+w 105
+h 20
+controlPv "$(P):SET_TEMP"
 displayMode "decimal"
 precision 2
 fgColor index 25
@@ -282,6 +169,32 @@ font "arial-medium-r-12.0"
 lineWidth 0
 endObjectProperties
 
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 100
+y 210
+w 105
+h 20
+controlPv "$(P):TEMP"
+format "float"
+font "arial-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
 # (Static Text)
 object activeXTextClass
 beginObjectProperties
@@ -289,87 +202,16 @@ major 4
 minor 1
 release 1
 x 10
-y 225
-w 109
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Set Pump Level"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 300
-y 225
-w 48
-h 16
-font "arial-medium-r-14.0"
+y 210
+w 85
+h 20
+font "arial-medium-r-12.0"
 fgColor index 14
 bgColor index 3
 useDisplayBg
 value {
-  "(0 to 8)"
+  "Water"
 }
-autoSize
-endObjectProperties
-
-# (Group)
-object activeGroupClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 315
-y 65
-w 165
-h 130
-
-beginGroup
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 436
-y 65
-w 45
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Status"
-}
-autoSize
-endObjectProperties
-
-# (Byte)
-object ByteClass
-beginObjectProperties
-major 4
-minor 0
-release 0
-x 446
-y 95
-w 30
-h 100
-controlPv "$(P):STATUS"
-lineColor index 14
-onColor index 20
-offColor index 24
-numBits 5
 endObjectProperties
 
 # (Static Text)
@@ -378,102 +220,17 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 316
-y 95
-w 127
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
+x 10
+y 235
+w 85
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
 bgColor index 3
 useDisplayBg
 value {
-  "Over Temperature"
+  "External"
 }
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 326
-y 115
-w 116
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Water Low Level"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 336
-y 135
-w 105
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Pump Blocked"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 336
-y 155
-w 104
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Internal Fault 1"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 336
-y 175
-w 105
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Internal Fault 2"
-}
-autoSize
-endObjectProperties
-
-endGroup
-
 endObjectProperties
 
 # (Text Monitor)
@@ -482,9 +239,9 @@ beginObjectProperties
 major 4
 minor 6
 release 0
-x 165
-y 90
-w 130
+x 100
+y 235
+w 105
 h 20
 controlPv "$(P):EXT_TEMP"
 format "float"
@@ -508,58 +265,119 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 10
-y 95
-w 151
-h 16
+x 5
+y 265
+w 55
+h 20
 font "arial-bold-r-14.0"
-fgColor index 10
+fgColor index 14
 bgColor index 3
 useDisplayBg
 value {
-  "External Temperature"
+  "Pump"
 }
-autoSize
 endObjectProperties
 
-# (Exit Button)
-object activeExitButtonClass
+# (Static Text)
+object activeXTextClass
 beginObjectProperties
 major 4
 minor 1
-release 0
-x 308
-y 372
-w 120
-h 30
-fgColor index 46
+release 1
+x 10
+y 290
+w 40
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
 bgColor index 3
-topShadowColor index 1
-botShadowColor index 11
-label "EXIT"
-font "arial-medium-r-18.0"
-3d
+useDisplayBg
+value {
+  "Speed"
+}
 endObjectProperties
 
-# (Shell Command)
-object shellCmdClass
+# (Textentry)
+object TextentryClass
 beginObjectProperties
-major 4
-minor 3
+major 10
+minor 0
 release 0
-x 180
-y 370
-w 120
-h 30
+x 100
+y 290
+w 105
+h 20
+controlPv "$(P):SET_PUMP"
+displayMode "decimal"
+precision 2
 fgColor index 25
 bgColor index 3
-topShadowColor index 1
-botShadowColor index 11
-font "arial-medium-r-18.0"
-buttonLabel "HELP"
-numCmds 1
-command {
-  0 "firefox $(which lRE2xx.edl | sed \"s|data/lRE2xx.edl|documentation/index.html|\")&"
+fill
+font "arial-medium-r-12.0"
+lineWidth 0
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 210
+y 290
+w 105
+h 20
+controlPv "$(P):PUMP"
+format "float"
+font "arial-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 5
+y 320
+w 55
+h 20
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Level"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 10
+y 345
+w 70
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Water level"
 }
 endObjectProperties
 
@@ -569,9 +387,127 @@ beginObjectProperties
 major 4
 minor 6
 release 0
-x 88
-y 347
-w 350
+x 100
+y 345
+w 105
+h 20
+controlPv "$(P):LEVEL"
+format "float"
+font "arial-medium-r-12.0"
+fontAlign "center"
+fgColor index 16
+fgAlarm
+bgColor index 10
+limitsFromDb
+nullColor index 30
+showUnits
+useAlarmBorder
+newPos
+objType "monitors"
+noExecuteClipMask
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 5
+y 105
+w 60
+h 20
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Control"
+}
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 15
+y 130
+w 75
+h 20
+fgColor index 21
+onColor index 4
+offColor index 3
+inconsistentColor index 3
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(P):STANDBY"
+onLabel "Stop"
+offLabel "Stop"
+labelType "literal"
+buttonType "push"
+3d
+font "arial-bold-r-12.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Button)
+object activeButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 100
+y 130
+w 75
+h 20
+fgColor index 19
+onColor index 4
+offColor index 3
+inconsistentColor index 3
+topShadowColor index 1
+botShadowColor index 11
+controlPv "$(P):STANDBY"
+onLabel "Start"
+offLabel "Start"
+labelType "literal"
+buttonType "push"
+3d
+font "arial-bold-r-12.0"
+objType "controls"
+controlBitPos 1
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 5
+y 375
+w 135
+h 20
+font "arial-bold-r-14.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Advanced control"
+}
+endObjectProperties
+
+# (Text Monitor)
+object activeXTextDspClass:noedit
+beginObjectProperties
+major 4
+minor 6
+release 0
+x 95
+y 425
+w 255
 h 20
 controlPv "$(P):RESPONSE"
 font "arial-medium-r-10.0"
@@ -586,36 +522,16 @@ objType "monitors"
 noExecuteClipMask
 endObjectProperties
 
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 8
-y 347
-w 72
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
-bgColor index 3
-useDisplayBg
-value {
-  "Response"
-}
-autoSize
-endObjectProperties
-
 # (Textentry)
 object TextentryClass
 beginObjectProperties
 major 10
 minor 0
 release 0
-x 88
-y 297
-w 350
-h 40
+x 95
+y 400
+w 255
+h 20
 controlPv "$(P):COMMAND"
 displayMode "decimal"
 precision 6
@@ -631,43 +547,225 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 8
-y 307
-w 76
-h 16
-font "arial-bold-r-14.0"
-fgColor index 10
+x 10
+y 400
+w 70
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
 bgColor index 3
 useDisplayBg
 value {
   "Command"
 }
-autoSize
 endObjectProperties
 
-# (Text Monitor)
-object activeXTextDspClass:noedit
+# (Static Text)
+object activeXTextClass
 beginObjectProperties
 major 4
-minor 6
-release 0
-x 195
-y 145
-w 100
-h 30
-controlPv "$(P):SET_TEMP:RBV"
-format "float"
+minor 1
+release 1
+x 10
+y 425
+w 70
+h 20
 font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Response"
+}
+endObjectProperties
+
+# (Group)
+object activeGroupClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 215
+y 50
+w 135
+h 120
+
+beginGroup
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 215
+y 50
+w 135
+h 20
+font "arial-bold-r-14.0"
 fontAlign "center"
-fgColor index 16
-fgAlarm
-bgColor index 10
-limitsFromDb
-nullColor index 30
-showUnits
-useAlarmBorder
-newPos
-objType "monitors"
-noExecuteClipMask
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Status"
+}
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 320
+y 70
+w 30
+h 100
+controlPv "$(P):STATUS"
+lineColor index 14
+onColor index 20
+offColor index 24
+numBits 5
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 215
+y 70
+w 105
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Over Temperature"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 215
+y 90
+w 105
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Water Low Level"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 215
+y 110
+w 93
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Pump Blocked"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 215
+y 130
+w 95
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Internal Fault 1"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 215
+y 150
+w 95
+h 20
+font "arial-medium-r-12.0"
+fgColor index 14
+bgColor index 3
+useDisplayBg
+value {
+  "Internal Fault 2"
+}
+endObjectProperties
+
+endGroup
+
+endObjectProperties
+
+# (Exit Button)
+object activeExitButtonClass
+beginObjectProperties
+major 4
+minor 1
+release 0
+x 275
+y 465
+w 80
+h 25
+fgColor index 46
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+label "EXIT"
+font "arial-bold-r-14.0"
+3d
+endObjectProperties
+
+# (Shell Command)
+object shellCmdClass
+beginObjectProperties
+major 4
+minor 3
+release 0
+x 5
+y 465
+w 80
+h 25
+fgColor index 25
+bgColor index 3
+topShadowColor index 1
+botShadowColor index 11
+font "arial-bold-r-14.0"
+buttonLabel "HELP"
+numCmds 1
+command {
+  0 "firefox $(which lRE2xx.edl | sed \"s|data/lRE2xx.edl|documentation/index.html|\")&"
+}
 endObjectProperties
 

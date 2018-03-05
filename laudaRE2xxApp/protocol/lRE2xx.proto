@@ -95,6 +95,16 @@ setPump {
    out "OUT_SP_01_%d";
 }
 
+# /// Switch device on (from standby)
+start {
+   out "START";
+}
+
+# /// Switch device to standby (pump, heating and chiller off)
+stop {
+   out "STOP";
+}
+
 #############################################################
 # Generic protocol
 ############################################################

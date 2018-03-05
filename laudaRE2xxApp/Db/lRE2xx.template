@@ -133,6 +133,26 @@ record(longout, "$(P):SET_PUMP") {
   field(SDIS, "$(P):DISABLE")
 }
 
+# ///
+# /// Switch device to standby
+# ///
+record(bo, "$(P):STANDBY") {
+  field(DTYP, "stream")
+  field(DESC, "Switch device to standby")
+  field(OUT, "@lRE2xx.proto stop $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Switch device on
+# ///
+record(bo, "$(P):ON") {
+  field(DTYP, "stream")
+  field(DESC, "Switch device on")
+  field(OUT, "@lRE2xx.proto start $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+}
+
 #################################################################
 # Generic protocol PV, to send any command.
 #################################################################
