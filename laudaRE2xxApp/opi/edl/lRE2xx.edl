@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 362
-y 210
+x 370
+y 258
 w 360
 h 500
 font "arial-medium-r-18.0"
@@ -39,7 +39,7 @@ fontAlign "center"
 fgColor index 14
 bgColor index 73
 value {
-  "Lauda Eco/Proline - $(P)"
+  "$(P)"
 }
 border
 endObjectProperties
@@ -52,7 +52,7 @@ minor 1
 release 0
 x 15
 y 75
-w 75
+w 90
 h 20
 fgColor index 25
 onColor index 20
@@ -309,7 +309,6 @@ w 105
 h 20
 controlPv "$(P):SET_PUMP"
 displayMode "decimal"
-precision 2
 fgColor index 25
 bgColor index 3
 fill
@@ -377,7 +376,7 @@ fgColor index 14
 bgColor index 3
 useDisplayBg
 value {
-  "Water level"
+  "Water level*"
 }
 endObjectProperties
 
@@ -753,7 +752,7 @@ beginObjectProperties
 major 4
 minor 3
 release 0
-x 5
+x 190
 y 465
 w 80
 h 25
@@ -766,6 +765,25 @@ buttonLabel "HELP"
 numCmds 1
 command {
   0 "firefox $(which lRE2xx.edl | sed \"s|data/lRE2xx.edl|documentation/index.html|\")&"
+}
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 5
+y 470
+w 110
+h 20
+font "arial-bold-r-12.0"
+fgColor index 36
+bgColor index 3
+useDisplayBg
+value {
+  "* PROLINE ONLY"
 }
 endObjectProperties
 
