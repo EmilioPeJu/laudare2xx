@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 370
-y 258
+x 2980
+y 825
 w 360
 h 500
 font "arial-medium-r-18.0"
@@ -468,7 +468,7 @@ offColor index 3
 inconsistentColor index 3
 topShadowColor index 1
 botShadowColor index 11
-controlPv "$(P):STANDBY"
+controlPv "$(P):START"
 onLabel "Start"
 offLabel "Start"
 labelType "literal"
@@ -785,5 +785,23 @@ useDisplayBg
 value {
   "* PROLINE ONLY"
 }
+endObjectProperties
+
+# (Byte)
+object ByteClass
+beginObjectProperties
+major 4
+minor 0
+release 0
+x 185
+y 130
+w 20
+h 20
+controlPv "$(P):POWER"
+lineColor index 14
+onColor index 19
+offColor index 15
+lineWidth 2
+numBits 1
 endObjectProperties
 

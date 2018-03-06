@@ -106,6 +106,18 @@ record(ai, "$(P):STATUS") {
   field(SDIS, "$(P):DISABLE")
 }
 
+# ///
+# /// Read the status bits.
+# ///
+record(bi, "$(P):POWER") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getPowerStatus $(PORT) $(ADDR)")
+  field(SCAN, "1 second")
+  field(ZNAM, "On")
+  field(ONAM, "Off")
+  field(SDIS, "$(P):DISABLE")
+}
+
 ################################################################
 # Write records
 ################################################################

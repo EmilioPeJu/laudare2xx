@@ -81,6 +81,13 @@ getTempReadback {
     in "%f";
 }
 
+# /// Read temperature setpoint 
+getPowerStatus {
+    ExtraInput = Ignore;
+    out "IN_MODE_02";
+    in "%i";
+}
+
 ###################################################
 # Set functions
 ###################################################
