@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 2980
-y 825
+x 2984
+y 850
 w 360
 h 500
 font "arial-medium-r-18.0"
@@ -468,7 +468,7 @@ offColor index 3
 inconsistentColor index 3
 topShadowColor index 1
 botShadowColor index 11
-controlPv "$(P):START"
+controlPv "$(P):ON"
 onLabel "Start"
 offLabel "Start"
 labelType "literal"
