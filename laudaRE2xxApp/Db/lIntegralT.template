@@ -47,7 +47,6 @@ record(ai, "$(P):TEMP") {
   field(SDIS, "$(P):DISABLE")
 }
 
-# #########################################################
 # ///
 # /// Read the external pt100 temperature.
 # ///
@@ -84,7 +83,7 @@ record(ai, "$(P):SET_TEMP:RBV") {
 }
 
 # ///
-# /// Read the status bits.
+# /// Read the status bits
 # ///
 #% archiver 10 Monitor
 #% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):STATUS
