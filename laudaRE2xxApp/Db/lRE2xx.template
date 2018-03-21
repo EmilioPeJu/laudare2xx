@@ -3,7 +3,6 @@
 #! DBD("../../dbd/laudaRE2xx.dbd")
 #! DBDEND
 
-
 ################################################################
 #
 # Template file for lauda ecoline star edition, also valid for
@@ -60,6 +59,41 @@ record(ai, "$(P):TEMP") {
 }
 
 # ///
+# /// Read the external pt100 temperature.
+# ///
+# % archiver 10 Monitor
+record(ai, "$(P):EXT_TEMP") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getExtTemp($(P)) $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(EGU, "C")
+  field(HIHI, "$(HIHI)")
+  field(HIGH, "$(HIGH)")
+  field(LOW, "$(LOW)")
+  field(LOLO, "$(LOLO)")
+  field(HHSV, "MAJOR")
+  field(HSV, "MINOR")
+  field(LSV, "MINOR")
+  field(LLSV, "MAJOR")
+  field(PREC, "2")
+  field(HYST, "0.1")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Read temperature setpoint (read back of setTemp)
+# ///
+# % archiver 10 Monitor
+record(ai, "$(P):SET_TEMP:RBV") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getTempReadback $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(EGU, "C")
+  field(PREC, "2")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
 # /// Read the water bath level (height above the minimum).
 # ///
 #% archiver 10 Monitor
@@ -93,7 +127,7 @@ record(longin, "$(P):PUMP") {
 }
 
 # ///
-# /// Read the status bits.
+# /// Read the status bits
 # ///
 #% archiver 10 Monitor
 #% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):STATUS
@@ -107,7 +141,7 @@ record(ai, "$(P):STATUS") {
 }
 
 # ///
-# /// Read the status bits.
+# /// Read the power status
 # ///
 record(bi, "$(P):POWER") {
   field(DTYP, "stream")
@@ -115,6 +149,37 @@ record(bi, "$(P):POWER") {
   field(SCAN, "1 second")
   field(ZNAM, "On")
   field(ONAM, "Off")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Read which program is running now (0=none)
+# ///
+record(ai, "$(P):PROGRUNNING_RAW") {
+  field(DESC, "Program number currently running")
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getProgRunning $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(SDIS, "$(P):DISABLE")
+  field(FLNK, "$(P):PROGRUNNING")
+}
+
+record(calcout, "$(P):PROGRUNNING") {
+  field(DESC, "Is any program running now")
+  field(INPA, "$(P):PROGRUNNING_RAW")
+  field(CALC, "A>0")
+}
+
+# ///
+# /// Read the control variable
+# ///
+record(bi, "$(P):CONTROL_VAR") {
+  field(DESC, "Current control variable")
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getControlVariable $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(ZNAM, "Internal")
+  field(ONAM, "Ext Pt100")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -165,6 +230,87 @@ record(bo, "$(P):ON") {
   field(SDIS, "$(P):DISABLE")
 }
 
+# ///
+# /// Set the control variable
+# ///
+record(bo, "$(P):SET_CONTROL_VAR") {
+  field(DESC, "Set control variable")
+  field(DTYP, "stream")
+  field(OUT, "@lRE2xx.proto setControlVariable($(P)) $(PORT) $(ADDR)")
+  field(ZNAM, "Internal")
+  field(ONAM, "Ext Pt100")
+  field(SDIS, "$(P):DISABLE")
+}
+
+################################################################
+# Ramping
+################################################################
+# ///
+# /// Set the ramp target temperature
+# ///
+#% autosave 1 VAL
+record(ao, "$(P):RTEMP") {
+  field(DESC, "Ramp target temperature")
+  field(PREC, "2")
+  field(EGU, "C")
+  field(PINI, "YES")
+  field(FLNK, "$(P):RTIME")  
+}
+
+# ///
+# /// Set the ramp rate
+# ///
+#% autosave 1 VAL
+record(ao, "$(P):RRATE") {
+  field(DESC, "Ramp rate")
+  field(PINI, "YES")
+  field(PREC, "2")
+  field(EGU, "C/min")  
+  field(FLNK, "$(P):RTIME")
+  field(DRVH, "$(RRDRVH=10.00)")
+  field(DRVL, "$(RRDRVL=0.01)")   
+}
+
+# ///
+# /// Calculate the ramp time
+# ///
+record(calc, "$(P):RTIME") {
+  field(DESC, "Ramp time")
+  field(INPA, "$(P):RRATE")
+  field(INPB, "$(P):TEMP")
+  field(INPC, "$(P):RTEMP")  
+  field(CALC, "ABS(C-B)/A")  
+  field(EGU, "min")  
+}
+
+# ///
+# /// Start the ramp program
+# ///
+record(ao, "$(P):RSTART") {
+  field(DESC, "Start program")
+  field(DTYP, "stream")
+  field(OUT, "@lRE2xx.proto startProg($(P)) $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Stop the ramp program
+# ///
+record(ao, "$(P):RSTOP") {
+  field(DESC, "Stop program")
+  field(DTYP, "stream")
+  field(OUT, "@lRE2xx.proto stopProg $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+  field(FLNK, "$(P):RSTOP_POS")  
+}
+
+record(dfanout, "$(P):RSTOP_POS") {
+  field(DESC, "Adjust setpoint temperature")
+  field(OMSL, "closed_loop")
+  field(DOL, "$(P):TEMP")
+  field(OUTA, "$(P):SET_TEMP PP")
+}
+
 #################################################################
 # Generic protocol PV, to send any command.
 #################################################################
@@ -195,42 +341,6 @@ record(bo, "$(P):DISABLE") {
   field(OMSL, "supervisory")
   field(ZNAM, "Enabled")
   field(ONAM, "Disabled")
-}
-
-# ############################################################
-# ///
-# /// Read the external pt100 temperature.
-# ///
-# % archiver 10 Monitor
-record(ai, "$(P):EXT_TEMP") {
-  field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getExtTemp($(P)) $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN) second")
-  field(EGU, "C")
-  field(HIHI, "$(HIHI)")
-  field(HIGH, "$(HIGH)")
-  field(LOW, "$(LOW)")
-  field(LOLO, "$(LOLO)")
-  field(HHSV, "MAJOR")
-  field(HSV, "MINOR")
-  field(LSV, "MINOR")
-  field(LLSV, "MAJOR")
-  field(PREC, "2")
-  field(HYST, "0.1")
-  field(SDIS, "$(P):DISABLE")
-}
-
-# ///
-# /// Read temperature setpoint (read back of setTemp)
-# ///
-# % archiver 10 Monitor
-record(ai, "$(P):SET_TEMP:RBV") {
-  field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getTempReadback $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN) second")
-  field(EGU, "C")
-  field(PREC, "2")
-  field(SDIS, "$(P):DISABLE")
 }
 
 #################################################################

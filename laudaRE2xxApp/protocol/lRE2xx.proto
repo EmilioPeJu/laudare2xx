@@ -81,11 +81,25 @@ getTempReadback {
     in "%f";
 }
 
-# /// Read temperature setpoint 
+# /// Read power status
 getPowerStatus {
     ExtraInput = Ignore;
     out "IN_MODE_02";
     in "%i";
+}
+
+# /// Read program status
+getProgRunning {
+   ExtraInput = Ignore;
+   out "RMP_IN_05";
+   in "%f";
+}
+
+# /// Read control variable
+getControlVariable {
+   ExtraInput = Ignore;
+   out "IN_MODE_01";
+   in "%d";
 }
 
 ###################################################
@@ -110,6 +124,42 @@ start {
 # /// Switch device to standby (pump, heating and chiller off)
 stop {
    out "STOP";
+}
+
+# /// Start a program running:
+# /// RMP_SELECT_X: Selection of program (1-5) to which further commands apply. The unit defaults to program 5 when it's switched on
+# /// RMP_RESET: delete program (all segments)
+# /// RMP_OUT_00_XXX.XX_XXXXX_XXX.XX_X: append a programmer segment, specifying target temperature, ramp time, tolerance and pump level
+# /// RMP_OUT_02_XXX: number of program loops 0-250 (with 0 meaning endless)
+# /// RMP_START: start the programmer
+# /// NOTE: if we don't read the "OK" in between the out commands, only the first out command is processed by the device
+startProg {
+   out "RMP_SELECT_5";
+   in "OK";
+   out "RMP_RESET";
+   in "OK";
+   out "RMP_OUT_00_%(\$1:TEMP.VAL).2f_0_9.9_%(\$1:PUMP.VAL)d";
+   in "OK";
+   out "RMP_OUT_00_%(\$1:RTEMP.VAL).2f_%(\$1:RTIME.VAL)d_1.0_%(\$1:PUMP.VAL)d";   
+   in "OK";
+   out "RMP_OUT_02_1";
+   in "OK";
+   out "RMP_START";
+   in "OK";
+}
+
+# /// Stop a program running
+stopProg {
+   out "RMP_STOP";
+   in "OK";
+}
+
+# /// Set the control variable 0=internal, 1=external Pt100
+setControlVariable {
+   out "OUT_MODE_01_%d";
+   in "OK";
+   # Parse error status
+   @mismatch{in "%(\$1:ERROR)s";}
 }
 
 #############################################################
