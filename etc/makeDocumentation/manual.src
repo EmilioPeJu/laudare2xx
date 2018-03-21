@@ -1,6 +1,12 @@
 /**
 \page release_notes Release Notes
 
+\section rel2_6 Release 2-6 (Mar 2018)
+
+Added ramping functionality and access to get/set of the control variable (RE2xx only, Integral to follow) (re JIRA issue I22-544).
+Modified gui layout to have DLS-style group boxes.
+Renamed old ramping template, as now some of the functionality is in the main template.
+
 \section rel2_3 Release 2-3 (Sep 2017)
 
 Documentation updates. Renamed the RS485 streamDevice functions with
@@ -99,8 +105,8 @@ Write Only PVs
 **/
 /**
 \mainpage LaudaRE2xx EPICS Support Module
-Release 2-3 September 2017<br>
-Ronaldo Mercado
+Release 2-6 March 2018<br>
+Isabella Rey
 
 \section intro_sec Introduction
 
@@ -158,7 +164,7 @@ in use in beamlines I22 and I11-1 as of August 2017
 </ul>
 \section future_work Future work
 
-I22 have requested to support ramping (issue I22-544)
+I22 have requested to support ramping (issue I22-544). This has now been implemented on RE2xx; Integral to follow soon after.
 
 \section contact Reporting bugs
 Report bugs to the module maintainer, currently <a href="mailto:ronaldo.mercado@diamond.ac.uk">Ronaldo Mercado</a> (Aug 2017).
