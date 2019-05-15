@@ -3,6 +3,7 @@
 #! DBD("../../dbd/laudaRE2xx.dbd")
 #! DBDEND
 
+
 ################################################################
 #
 # Template file for lauda ecoline star edition, also valid for
@@ -114,19 +115,6 @@ record(calc, "$(P):LEVEL") {
 }
 
 # ///
-# /// Read the pump level (0-7)
-# ///
-record(longin, "$(P):PUMP") {
-  field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getPump $(PORT) $(ADDR)")
-  field(SCAN, "$(SCAN) second")
-  field(LOW, "0")
-  field(LOLO, "-1")
-  field(HIHI, "9")
-  field(SDIS, "$(P):DISABLE")
-}
-
-# ///
 # /// Read the status bits
 # ///
 #% archiver 10 Monitor
@@ -198,19 +186,6 @@ record(ao, "$(P):SET_TEMP") {
 }
 
 # ///
-# /// Set the pump level (integer from 0 to 7; 0 sets the unit to standby mode)
-# ///
-#% autosave 1 VAL
-record(longout, "$(P):SET_PUMP") {
-  field(DTYP, "stream")
-  field(DESC, "Set pump level")
-  field(OUT, "@lRE2xx.proto setPump $(PORT) $(ADDR)")
-  field(DRVH, "8")
-  field(DRVL, "0")
-  field(SDIS, "$(P):DISABLE")
-}
-
-# ///
 # /// Switch device to standby
 # ///
 record(bo, "$(P):STANDBY") {
@@ -254,7 +229,7 @@ record(ao, "$(P):RTEMP") {
   field(PREC, "2")
   field(EGU, "C")
   field(PINI, "YES")
-  field(FLNK, "$(P):RTIME")  
+  field(FLNK, "$(P):RTIME")
 }
 
 # ///
@@ -265,10 +240,10 @@ record(ao, "$(P):RRATE") {
   field(DESC, "Ramp rate")
   field(PINI, "YES")
   field(PREC, "2")
-  field(EGU, "C/min")  
+  field(EGU, "C/min")
   field(FLNK, "$(P):RTIME")
   field(DRVH, "$(RRDRVH=10.00)")
-  field(DRVL, "$(RRDRVL=0.01)")   
+  field(DRVL, "$(RRDRVL=0.01)")
 }
 
 # ///
@@ -278,9 +253,9 @@ record(calc, "$(P):RTIME") {
   field(DESC, "Ramp time")
   field(INPA, "$(P):RRATE")
   field(INPB, "$(P):TEMP")
-  field(INPC, "$(P):RTEMP")  
-  field(CALC, "ABS(C-B)/A")  
-  field(EGU, "min")  
+  field(INPC, "$(P):RTEMP")
+  field(CALC, "ABS(C-B)/A")
+  field(EGU, "min")
 }
 
 # ///
@@ -301,7 +276,7 @@ record(ao, "$(P):RSTOP") {
   field(DTYP, "stream")
   field(OUT, "@lRE2xx.proto stopProg $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
-  field(FLNK, "$(P):RSTOP_POS")  
+  field(FLNK, "$(P):RSTOP_POS")
 }
 
 record(dfanout, "$(P):RSTOP_POS") {
@@ -351,10 +326,17 @@ record(stringin, "$(P):ERROR") {
 }
 
 #! Further lines contain data used by VisualDCT
-#! View(0,0,1.0)
+#! View(266,0,1.0)
 #! Record("$(P):TEMP",40,35,0,0,"$(P):TEMP")
 #! Field("$(P):TEMP.SDIS",16777215,1,"$(P):TEMP.SDIS")
 #! Link("$(P):TEMP.SDIS","$(P):DISABLE.VAL")
+#! Field("$(P):TEMP.VAL",16777215,1,"$(P):TEMP.VAL")
+#! Record("$(P):EXT_TEMP",360,15,0,1,"$(P):EXT_TEMP")
+#! Field("$(P):EXT_TEMP.SDIS",16777215,0,"$(P):EXT_TEMP.SDIS")
+#! Link("$(P):EXT_TEMP.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):SET_TEMP:RBV",20,20,0,0,"$(P):SET_TEMP:RBV")
+#! Field("$(P):SET_TEMP:RBV.SDIS",16777215,1,"$(P):SET_TEMP:RBV.SDIS")
+#! Link("$(P):SET_TEMP:RBV.SDIS","$(P):DISABLE.VAL")
 #! Record("$(P):LEVELRAW",680,54,0,0,"$(P):LEVELRAW")
 #! Field("$(P):LEVELRAW.SDIS",16777215,0,"$(P):LEVELRAW.SDIS")
 #! Link("$(P):LEVELRAW.SDIS","$(P):DISABLE.VAL")
@@ -364,18 +346,65 @@ record(stringin, "$(P):ERROR") {
 #! Record("$(P):LEVEL",1060,114,0,0,"$(P):LEVEL")
 #! Field("$(P):LEVEL.INPA",16777215,0,"$(P):LEVEL.INPA")
 #! Link("$(P):LEVEL.INPA","$(P):LEVELRAW.VAL")
-#! Record("$(P):PUMP",1020,346,0,0,"$(P):PUMP")
-#! Field("$(P):PUMP.SDIS",16777215,0,"$(P):PUMP.SDIS")
-#! Link("$(P):PUMP.SDIS","$(P):DISABLE.VAL")
 #! Record("$(P):STATUS",40,340,0,0,"$(P):STATUS")
 #! Field("$(P):STATUS.SDIS",16777215,1,"$(P):STATUS.SDIS")
 #! Link("$(P):STATUS.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):POWER",260,20,0,0,"$(P):POWER")
+#! Field("$(P):POWER.SDIS",16777215,1,"$(P):POWER.SDIS")
+#! Link("$(P):POWER.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):PROGRUNNING_RAW",500,20,0,0,"$(P):PROGRUNNING_RAW")
+#! Field("$(P):PROGRUNNING_RAW.SDIS",16777215,0,"$(P):PROGRUNNING_RAW.SDIS")
+#! Link("$(P):PROGRUNNING_RAW.SDIS","$(P):DISABLE.VAL")
+#! Field("$(P):PROGRUNNING_RAW.FLNK",16777215,1,"$(P):PROGRUNNING_RAW.FLNK")
+#! Link("$(P):PROGRUNNING_RAW.FLNK","$(P):PROGRUNNING")
+#! Field("$(P):PROGRUNNING_RAW.VAL",16777215,0,"$(P):PROGRUNNING_RAW.VAL")
+#! Record("$(P):PROGRUNNING",740,22,0,1,"$(P):PROGRUNNING")
+#! Field("$(P):PROGRUNNING.INPA",16777215,0,"$(P):PROGRUNNING.INPA")
+#! Link("$(P):PROGRUNNING.INPA","$(P):PROGRUNNING_RAW.VAL")
+#! Record("$(P):CONTROL_VAR",980,26,0,0,"$(P):CONTROL_VAR")
+#! Field("$(P):CONTROL_VAR.SDIS",16777215,0,"$(P):CONTROL_VAR.SDIS")
+#! Link("$(P):CONTROL_VAR.SDIS","$(P):DISABLE.VAL")
 #! Record("$(P):SET_TEMP",60,748,0,0,"$(P):SET_TEMP")
 #! Field("$(P):SET_TEMP.SDIS",16777215,1,"$(P):SET_TEMP.SDIS")
 #! Link("$(P):SET_TEMP.SDIS","$(P):DISABLE.VAL")
-#! Record("$(P):SET_PUMP",1220,400,0,0,"$(P):SET_PUMP")
-#! Field("$(P):SET_PUMP.SDIS",16777215,0,"$(P):SET_PUMP.SDIS")
-#! Link("$(P):SET_PUMP.SDIS","$(P):DISABLE.VAL")
+#! Field("$(P):SET_TEMP.VAL",16777215,1,"$(P):SET_TEMP.VAL")
+#! Record("$(P):STANDBY",1220,28,0,0,"$(P):STANDBY")
+#! Field("$(P):STANDBY.SDIS",16777215,0,"$(P):STANDBY.SDIS")
+#! Link("$(P):STANDBY.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):ON",1460,28,0,0,"$(P):ON")
+#! Field("$(P):ON.SDIS",16777215,0,"$(P):ON.SDIS")
+#! Link("$(P):ON.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):SET_CONTROL_VAR",1700,20,0,0,"$(P):SET_CONTROL_VAR")
+#! Field("$(P):SET_CONTROL_VAR.SDIS",16777215,0,"$(P):SET_CONTROL_VAR.SDIS")
+#! Link("$(P):SET_CONTROL_VAR.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):RTEMP",1940,14,0,0,"$(P):RTEMP")
+#! Field("$(P):RTEMP.FLNK",16777215,1,"$(P):RTEMP.FLNK")
+#! Link("$(P):RTEMP.FLNK","$(P):RTIME")
+#! Field("$(P):RTEMP.VAL",16777215,1,"$(P):RTEMP.VAL")
+#! Record("$(P):RRATE",2180,26,0,0,"$(P):RRATE")
+#! Field("$(P):RRATE.FLNK",16777215,1,"$(P):RRATE.FLNK")
+#! Link("$(P):RRATE.FLNK","$(P):RTIME")
+#! Field("$(P):RRATE.VAL",16777215,0,"$(P):RRATE.VAL")
+#! Record("$(P):RTIME",2420,20,0,0,"$(P):RTIME")
+#! Field("$(P):RTIME.INPA",16777215,0,"$(P):RTIME.INPA")
+#! Link("$(P):RTIME.INPA","$(P):RRATE.VAL")
+#! Field("$(P):RTIME.INPB",16777215,0,"$(P):RTIME.INPB")
+#! Link("$(P):RTIME.INPB","$(P):TEMP.VAL")
+#! Field("$(P):RTIME.INPC",16777215,0,"$(P):RTIME.INPC")
+#! Link("$(P):RTIME.INPC","$(P):RTEMP.VAL")
+#! Record("$(P):RSTART",2660,28,0,0,"$(P):RSTART")
+#! Field("$(P):RSTART.SDIS",16777215,0,"$(P):RSTART.SDIS")
+#! Link("$(P):RSTART.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):RSTOP",2900,14,0,0,"$(P):RSTOP")
+#! Field("$(P):RSTOP.SDIS",16777215,0,"$(P):RSTOP.SDIS")
+#! Link("$(P):RSTOP.SDIS","$(P):DISABLE.VAL")
+#! Field("$(P):RSTOP.FLNK",16777215,1,"$(P):RSTOP.FLNK")
+#! Link("$(P):RSTOP.FLNK","$(P):RSTOP_POS")
+#! Record("$(P):RSTOP_POS",3140,28,0,1,"$(P):RSTOP_POS")
+#! Field("$(P):RSTOP_POS.DOL",16777215,0,"$(P):RSTOP_POS.DOL")
+#! Link("$(P):RSTOP_POS.DOL","$(P):TEMP.VAL")
+#! Field("$(P):RSTOP_POS.OUTA",16777215,0,"$(P):RSTOP_POS.OUTA")
+#! Link("$(P):RSTOP_POS.OUTA","$(P):SET_TEMP.VAL")
 #! Record("$(P):RESPONSE",940,748,0,0,"$(P):RESPONSE")
 #! Field("$(P):RESPONSE.VAL",16777215,0,"$(P):RESPONSE.VAL")
 #! Field("$(P):RESPONSE.SDIS",16777215,0,"$(P):RESPONSE.SDIS")
@@ -387,6 +416,4 @@ record(stringin, "$(P):ERROR") {
 #! Link("$(P):COMMAND.OUT","$(P):RESPONSE.VAL")
 #! Record("$(P):DISABLE",340,540,0,1,"$(P):DISABLE")
 #! Field("$(P):DISABLE.VAL",16777215,1,"$(P):DISABLE.VAL")
-#! Record("$(P):EXT_TEMP",360,15,0,1,"$(P):EXT_TEMP")
-#! Field("$(P):EXT_TEMP.SDIS",16777215,0,"$(P):EXT_TEMP.SDIS")
-#! Link("$(P):EXT_TEMP.SDIS","$(P):DISABLE.VAL")
+#! Record("$(P):ERROR",3380,10,0,0,"$(P):ERROR")
