@@ -1,0 +1,17 @@
+/.cproject
+/.project
+/.settings
+etc/simulations/O.*
+etc/makeIocs/O.*
+bin
+configure/O.*
+dbd
+db
+data
+documentation/doxygen
+iocs
+laudaRE2xxApp/src/O.*
+laudaRE2xxApp/opi/edl/O.*
+laudaRE2xxApp/opi/symbol/O.*
+laudaRE2xxApp/Db/O.*
+laudaRE2xxApp/protocol/O.*
