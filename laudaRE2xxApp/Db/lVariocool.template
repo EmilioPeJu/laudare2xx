@@ -4,11 +4,11 @@
 #! DBDEND
 
 
-################################################################
-#
+# ############################################################
+# 
 # Template file for lauda ecoline star edition, also valid for
 # ecoline silver, ecoline gold and proline devices
-#
+# 
 # Macros:
 # % macro,  P,    Prefix for PV name
 # % macro,  PORT, Bus/Port Address (eg. ASYN Port).
@@ -20,8 +20,8 @@
 # % macro,  LOLO, LOLO value for input temperature
 # % macro,  name, object and gui association name
 # % macro,  DESC, Description
-#
-################################################################
+# 
+# ##############################################################
 # % gui, $(name=), edmembed, lRE2xx_embed.edl, P=$(P),EDM_FILE=lRE2xx.edl
 # % gui, $(name=), edm, EDM_FILE=lRE2xx.edl, P=$(P)
 # % gui, $(name=), boydetail,laudaRE2xxApp_opi/laudaRE2xx_detail.opi, P=$(P), DESC=$(DESC)
@@ -33,14 +33,14 @@
 # % gui, $(name=), statusbits, Status,   $(P):STATUS, Over Temperature, Water Low Level, Pump Blocked, Internal Fault 1, Internal Fault 2
 # % gui, $(name=), demand, Command,   $(P):COMMAND
 # % gui, $(name=), readback, Response,   $(P):RESPONSE
-################################################################
+# ##############################################################
 # Read records
-################################################################
+# ##############################################################
 # ///
 # /// Read the water temperature.
 # ///
-#% archiver 10 Monitor
-#% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):TEMP
+# % archiver 10 Monitor
+# % alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):TEMP
 record(ai, "$(P):TEMP") {
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
@@ -115,6 +115,18 @@ record(calc, "$(P):LEVEL") {
 }
 
 # ///
+# /// Read the pump level (0-7)
+# ///
+record(longin, "$(P):PUMP") {
+  field(DTYP, "stream")
+  field(INP, "@lRE2xx.proto getPump $(PORT) $(ADDR)")
+  field(LOW, "0")
+  field(LOLO, "-1")
+  field(HIHI, "9")
+  field(SDIS, "1")
+}
+
+# ///
 # /// Read the status bits
 # ///
 #% archiver 10 Monitor
@@ -183,6 +195,19 @@ record(ao, "$(P):SET_TEMP") {
   field(DESC, "Setpoint temperature")
   field(OUT, "@lRE2xx.proto setTemp $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Set the pump level (integer from 0 to 7; 0 sets the unit to standby mode)
+# ///
+#% autosave 1 VAL
+record(longout, "$(P):SET_PUMP") {
+  field(DTYP, "stream")
+  field(DESC, "Set pump level")
+  field(OUT, "@lRE2xx.proto setPump $(PORT) $(ADDR)")
+  field(DRVH, "8")
+  field(DRVL, "0")
+  field(SDIS, "1")
 }
 
 # ///
@@ -326,7 +351,7 @@ record(stringin, "$(P):ERROR") {
 }
 
 #! Further lines contain data used by VisualDCT
-#! View(266,0,1.0)
+#! View(276,4,1.0)
 #! Record("$(P):TEMP",40,35,0,0,"$(P):TEMP")
 #! Field("$(P):TEMP.SDIS",16777215,1,"$(P):TEMP.SDIS")
 #! Link("$(P):TEMP.SDIS","$(P):DISABLE.VAL")
@@ -346,6 +371,8 @@ record(stringin, "$(P):ERROR") {
 #! Record("$(P):LEVEL",1060,114,0,0,"$(P):LEVEL")
 #! Field("$(P):LEVEL.INPA",16777215,0,"$(P):LEVEL.INPA")
 #! Link("$(P):LEVEL.INPA","$(P):LEVELRAW.VAL")
+#! Record("$(P):PUMP",900,360,0,0,"$(P):PUMP")
+#! Field("$(P):PUMP.SDIS",16777215,0,"$(P):PUMP.SDIS")
 #! Record("$(P):STATUS",40,340,0,0,"$(P):STATUS")
 #! Field("$(P):STATUS.SDIS",16777215,1,"$(P):STATUS.SDIS")
 #! Link("$(P):STATUS.SDIS","$(P):DISABLE.VAL")
@@ -368,6 +395,8 @@ record(stringin, "$(P):ERROR") {
 #! Field("$(P):SET_TEMP.SDIS",16777215,1,"$(P):SET_TEMP.SDIS")
 #! Link("$(P):SET_TEMP.SDIS","$(P):DISABLE.VAL")
 #! Field("$(P):SET_TEMP.VAL",16777215,1,"$(P):SET_TEMP.VAL")
+#! Record("$(P):SET_PUMP",1160,480,0,0,"$(P):SET_PUMP")
+#! Field("$(P):SET_PUMP.SDIS",16777215,0,"$(P):SET_PUMP.SDIS")
 #! Record("$(P):STANDBY",1220,28,0,0,"$(P):STANDBY")
 #! Field("$(P):STANDBY.SDIS",16777215,0,"$(P):STANDBY.SDIS")
 #! Link("$(P):STANDBY.SDIS","$(P):DISABLE.VAL")
