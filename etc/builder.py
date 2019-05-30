@@ -24,4 +24,4 @@ class lVariocool(AutoSubstitution, AutoProtocol):
     TemplateFile = 'lVariocool.template'
     
     #AutoProtocol attributes
-    ProtocolFiles = ['lRE2xx.proto']
+    ProtocolFiles = ['lREVariocool.proto']
