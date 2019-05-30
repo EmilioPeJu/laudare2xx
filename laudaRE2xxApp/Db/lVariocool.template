@@ -18,6 +18,8 @@
 # % macro,  HIGH, HIGH value for input temperature
 # % macro,  LOW,  LOW value for input temperature
 # % macro,  LOLO, LOLO value for input temperature
+# % macro,  RRDRVH,	Ramp rate upper clipping point [C/min]
+# % macro,  RRDRVL, Ramp rate lower clipping point [C/min]
 # % macro,  name, object and gui association name
 # % macro,  DESC, Description
 # 
@@ -43,7 +45,7 @@
 # % alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):TEMP
 record(ai, "$(P):TEMP") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getTemp $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -65,7 +67,7 @@ record(ai, "$(P):TEMP") {
 # % archiver 10 Monitor
 record(ai, "$(P):EXT_TEMP") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getExtTemp($(P)) $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getExtTemp($(P)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -87,7 +89,7 @@ record(ai, "$(P):EXT_TEMP") {
 # % archiver 10 Monitor
 record(ai, "$(P):SET_TEMP:RBV") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getTempReadback $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getTempReadback $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(PREC, "2")
@@ -100,7 +102,7 @@ record(ai, "$(P):SET_TEMP:RBV") {
 #% archiver 10 Monitor
 record(longin, "$(P):LEVELRAW") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getLevel($(P)) $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getLevel($(P)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(SDIS, "$(P):DISABLE")
   field(FLNK, "$(P):LEVEL")
@@ -118,8 +120,8 @@ record(calc, "$(P):LEVEL") {
 # /// Read the pump level (0-7)
 # ///
 record(longin, "$(P):PUMP") {
-  field(DTYP, "stream")
   field(INP, "0")
+  field(SCAN, "Passive")
   field(LOW, "0")
   field(LOLO, "-1")
   field(HIHI, "9")
@@ -133,7 +135,7 @@ record(longin, "$(P):PUMP") {
 #% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):STATUS
 record(ai, "$(P):STATUS") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getStatus $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getStatus $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(HHSV, "MAJOR")
   field(HIHI, "1")
@@ -145,7 +147,7 @@ record(ai, "$(P):STATUS") {
 # ///
 record(bi, "$(P):POWER") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getPowerStatus $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getPowerStatus $(PORT) $(ADDR)")
   field(SCAN, "1 second")
   field(ZNAM, "On")
   field(ONAM, "Off")
@@ -158,7 +160,7 @@ record(bi, "$(P):POWER") {
 record(ai, "$(P):PROGRUNNING_RAW") {
   field(DESC, "Program number currently running")
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getProgRunning $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getProgRunning $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(SDIS, "$(P):DISABLE")
   field(FLNK, "$(P):PROGRUNNING")
@@ -176,7 +178,7 @@ record(calcout, "$(P):PROGRUNNING") {
 record(bi, "$(P):CONTROL_VAR") {
   field(DESC, "Current control variable")
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getControlVariable $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto getControlVariable $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(ZNAM, "Internal")
   field(ONAM, "Ext Pt100")
@@ -193,7 +195,7 @@ record(bi, "$(P):CONTROL_VAR") {
 record(ao, "$(P):SET_TEMP") {
   field(DTYP, "stream")
   field(DESC, "Setpoint temperature")
-  field(OUT, "@lRE2xx.proto setTemp $(PORT) $(ADDR)")
+  field(OUT, "@lREVariocool.proto setTemp $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -204,10 +206,10 @@ record(ao, "$(P):SET_TEMP") {
 record(longout, "$(P):SET_PUMP") {
   field(DTYP, "stream")
   field(DESC, "Set pump level")
-  field(OUT, "0")
+  field(OUT, "@lRE2xx.proto setPump $(PORT) $(ADDR)")
   field(DRVH, "8")
   field(DRVL, "0")
-  field(SDIS, "$(P):DISABLE.VAL")
+  field(SDIS, "$(P):DISABLE")
 }
 
 # ///
@@ -216,7 +218,7 @@ record(longout, "$(P):SET_PUMP") {
 record(bo, "$(P):STANDBY") {
   field(DTYP, "stream")
   field(DESC, "Switch device to standby")
-  field(OUT, "@lRE2xx.proto stop $(PORT) $(ADDR)")
+  field(OUT, "@lREVariocool.proto stop $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -226,7 +228,7 @@ record(bo, "$(P):STANDBY") {
 record(bo, "$(P):ON") {
   field(DTYP, "stream")
   field(DESC, "Switch device on")
-  field(OUT, "@lRE2xx.proto start $(PORT) $(ADDR)")
+  field(OUT, "@lREVariocool.proto start $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -236,7 +238,7 @@ record(bo, "$(P):ON") {
 record(bo, "$(P):SET_CONTROL_VAR") {
   field(DESC, "Set control variable")
   field(DTYP, "stream")
-  field(OUT, "@lRE2xx.proto setControlVariable($(P)) $(PORT) $(ADDR)")
+  field(OUT, "@lREVariocool.proto setControlVariable($(P)) $(PORT) $(ADDR)")
   field(ZNAM, "Internal")
   field(ONAM, "Ext Pt100")
   field(SDIS, "$(P):DISABLE")
@@ -289,7 +291,7 @@ record(calc, "$(P):RTIME") {
 record(ao, "$(P):RSTART") {
   field(DESC, "Start program")
   field(DTYP, "stream")
-  field(OUT, "@lRE2xx.proto startProg($(P)) $(PORT) $(ADDR)")
+  field(OUT, "@lREVariocool.proto startProg($(P)) $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -299,7 +301,7 @@ record(ao, "$(P):RSTART") {
 record(ao, "$(P):RSTOP") {
   field(DESC, "Stop program")
   field(DTYP, "stream")
-  field(OUT, "@lRE2xx.proto stopProg $(PORT) $(ADDR)")
+  field(OUT, "@lREVariocool.proto stopProg $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
   field(FLNK, "$(P):RSTOP_POS")
 }
@@ -320,7 +322,7 @@ record(dfanout, "$(P):RSTOP_POS") {
 record(stringin, "$(P):RESPONSE") {
   field(DTYP, "stream")
   field(DESC, "Command string response.")
-  field(INP, "@lRE2xx.proto gen $(PORT) $(ADDR)")
+  field(INP, "@lREVariocool.proto gen $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -374,7 +376,7 @@ record(stringin, "$(P):ERROR") {
 #! Record("$(P):LEVEL",1560,54,0,0,"$(P):LEVEL")
 #! Field("$(P):LEVEL.INPA",16777215,0,"$(P):LEVEL.INPA")
 #! Link("$(P):LEVEL.INPA","$(P):LEVELRAW.VAL")
-#! Record("$(P):PUMP",660,500,0,0,"$(P):PUMP")
+#! Record("$(P):PUMP",740,400,0,0,"$(P):PUMP")
 #! Field("$(P):PUMP.SDIS",16777215,0,"$(P):PUMP.SDIS")
 #! Link("$(P):PUMP.SDIS","$(P):DISABLE.VAL")
 #! Record("$(P):STATUS",20,420,0,0,"$(P):STATUS")
@@ -402,10 +404,9 @@ record(stringin, "$(P):ERROR") {
 #! Link("$(P):SET_TEMP.SDIS","$(P):SET_TEMP/SDIS")
 #! Field("$(P):SET_TEMP.VAL",16777215,1,"$(P):SET_TEMP.VAL")
 #! Connector("$(P):SET_TEMP/SDIS","$(P):DISABLE.VAL",2140,630,16777215,"",0)
-#! Record("$(P):SET_PUMP",960,500,0,0,"$(P):SET_PUMP")
+#! Record("$(P):SET_PUMP",980,480,0,0,"$(P):SET_PUMP")
 #! Field("$(P):SET_PUMP.SDIS",16777215,0,"$(P):SET_PUMP.SDIS")
-#! Link("$(P):SET_PUMP.SDIS","$(P):SET_PUMP/SDIS")
-#! Connector("$(P):SET_PUMP/SDIS","$(P):DISABLE.VAL",860,670,16777215,"",0)
+#! Link("$(P):SET_PUMP.SDIS","$(P):DISABLE.VAL")
 #! Record("$(P):STANDBY",340,348,0,0,"$(P):STANDBY")
 #! Field("$(P):STANDBY.SDIS",16777215,0,"$(P):STANDBY.SDIS")
 #! Link("$(P):STANDBY.SDIS","$(P):DISABLE.VAL")
