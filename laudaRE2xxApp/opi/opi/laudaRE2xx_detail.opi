@@ -10,7 +10,7 @@
   <background_color>
     <color name="Canvas" red="200" green="200" blue="200" />
   </background_color>
-  <boy_version>5.0.0.201512160856</boy_version>
+  <boy_version>5.1.0.201710301201</boy_version>
   <foreground_color>
     <color red="192" green="192" blue="192" />
   </foreground_color>
@@ -60,7 +60,7 @@
     <display_level>0</display_level>
     <enabled>true</enabled>
     <font>
-      <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+      <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
     </font>
     <height>351</height>
     <macros>
@@ -204,7 +204,7 @@
     <row_2_row_height>27</row_2_row_height>
     <row_2_row_level>0</row_2_row_level>
     <row_2_row_mode>3</row_2_row_mode>
-    <row_2_row_name>Water temperature</row_2_row_name>
+    <row_2_row_name>Set Point</row_2_row_name>
     <row_2_row_name_value />
     <row_2_row_tooltip>Water temperature</row_2_row_tooltip>
     <row_30_row_name_value />
@@ -343,7 +343,7 @@
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color name="Text: FG" red="0" green="0" blue="0" />
@@ -382,7 +382,7 @@
         <border_width>1</border_width>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
         </font>
         <foreground_color>
           <color name="Text: FG" red="0" green="0" blue="0" />
@@ -424,7 +424,7 @@
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color name="Text: FG" red="0" green="0" blue="0" />
@@ -466,7 +466,7 @@
         <border_width>1</border_width>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
@@ -509,7 +509,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color name="Text: FG" red="0" green="0" blue="0" />
@@ -553,7 +553,7 @@ $(pv_value)</tooltip>
         <confirm_message></confirm_message>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
@@ -609,7 +609,7 @@ $(pv_value)</tooltip>
         <border_width>1</border_width>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="1">Default Bold</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="1" pixels="true">Default Bold</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
@@ -621,7 +621,7 @@ $(pv_value)</tooltip>
         <name>auto(readback|Water temperature)</name>
         <precision>0</precision>
         <precision_from_pv>true</precision_from_pv>
-        <pv_name>$(P):TEMP</pv_name>
+        <pv_name>$(P):SET_TEMP:RBV</pv_name>
         <pv_value />
         <rotation_angle>0.0</rotation_angle>
         <rules />
@@ -659,7 +659,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color name="Text: FG" red="0" green="0" blue="0" />
@@ -702,7 +702,7 @@ $(pv_value)</tooltip>
         <border_width>1</border_width>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="1">Default Bold</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="1" pixels="true">Default Bold</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
@@ -755,7 +755,7 @@ $(pv_value)</tooltip>
         <confirm_message></confirm_message>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
@@ -809,7 +809,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color name="Text: FG" red="0" green="0" blue="0" />
@@ -852,7 +852,7 @@ $(pv_value)</tooltip>
         <border_width>1</border_width>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="1">Default Bold</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="1" pixels="true">Default Bold</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
@@ -902,7 +902,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color name="Text: FG" red="0" green="0" blue="0" />
@@ -946,7 +946,7 @@ $(pv_value)</tooltip>
         <effect_3d>false</effect_3d>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
         </font>
         <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
         <foreground_color>
@@ -1002,7 +1002,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color name="Text: FG" red="0" green="0" blue="0" />
@@ -1046,7 +1046,7 @@ $(pv_value)</tooltip>
         <effect_3d>true</effect_3d>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
         </font>
         <forecolor_alarm_sensitive>false</forecolor_alarm_sensitive>
         <foreground_color>
@@ -1108,7 +1108,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color red="192" green="192" blue="192" />
@@ -1152,7 +1152,7 @@ $(pv_value)</tooltip>
         <confirm_message></confirm_message>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
@@ -1206,7 +1206,7 @@ $(pv_value)</tooltip>
       <enabled>true</enabled>
       <fc>false</fc>
       <font>
-        <opifont.name fontName="Arial" height="11" style="0">Default</opifont.name>
+        <opifont.name fontName="Liberation Sans" height="15" style="0" pixels="true">Default</opifont.name>
       </font>
       <foreground_color>
         <color red="192" green="192" blue="192" />
@@ -1249,7 +1249,7 @@ $(pv_value)</tooltip>
         <border_width>1</border_width>
         <enabled>true</enabled>
         <font>
-          <opifont.name fontName="Arial" height="11" style="1">Default Bold</opifont.name>
+          <opifont.name fontName="Liberation Sans" height="15" style="1" pixels="true">Default Bold</opifont.name>
         </font>
         <forecolor_alarm_sensitive>true</forecolor_alarm_sensitive>
         <foreground_color>
