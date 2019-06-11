@@ -337,7 +337,7 @@ record(stringout, "$(P):COMMAND") {
 
 # % autosave 1 VAL
 record(bo, "$(P):DISABLE") {
-  field(DESC, "Disable comms")
+  field(DESC, "Disable communication")
   field(PINI, "YES")
   field(VAL, "1")
   field(OMSL, "supervisory")

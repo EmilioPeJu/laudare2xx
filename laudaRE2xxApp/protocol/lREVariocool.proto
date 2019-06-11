@@ -11,8 +11,14 @@
 ##################################################
 
 Terminator = "\r\n";
-ReplyTimeout = 1000;
+# Timeout in ms
+ReplyTimeout = 5000;
+LockTimeout = 15000;
 
+@replytimeout {
+	wait 10000;
+}
+	
 
 ###################################################
 # Get functions
