@@ -17,6 +17,7 @@
 # % macro,  HIGH, HIGH value for input temperature
 # % macro,  LOW,  LOW value for input temperature
 # % macro,  LOLO, LOLO value for input temperature
+# % macro,  TEMPDESC, DESC field value on the TEMP record (water temperature).  Defaults to Chiller water temp
 # % macro,  name, object and gui association name
 # % macro,  DESC, Description
 #
@@ -41,6 +42,7 @@
 #% archiver 10 Monitor
 #% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):TEMP
 record(ai, "$(P):TEMP") {
+  field(DESC, "$(TEMPDESC=Chiller water temp)")
   field(DTYP, "stream")
   field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
