@@ -16,7 +16,7 @@ class lIntegralT(AutoSubstitution, AutoProtocol):
     TemplateFile = 'lIntegralT.template'
 
     # AutoProtocol attributes
-    ProtocolFiles = ['lRE2xx.proto']
+    ProtocolFiles = ['lIntegralT.proto']
 
 class lVariocool(AutoSubstitution, AutoProtocol):
     Dependecies = (Busy,)

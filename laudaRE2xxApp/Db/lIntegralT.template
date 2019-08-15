@@ -16,11 +16,15 @@
 # % macro,  HIGH, HIGH value for input temperature
 # % macro,  LOW,  LOW value for input temperature
 # % macro,  LOLO, LOLO value for input temperature
+# % macro,  TEMPDESC, DESC field value on the TEMP record (water temperature).  Defaults to Chiller water temp
+# % macro,  RRDRVH,	Ramp rate upper clipping point [C/min]
+# % macro,  RRDRVL, Ramp rate lower clipping point [C/min]
 # % macro,  name, object and gui association name
+# % macro,  DESC, Description
 #
 ################################################################
 # % gui, $(name=), edmembed, lRE2xx_embed.edl, P=$(P),EDM_FILE=lIntegralT.edl
-# % gui, $(name=), edm, lIntegralT.edl, P=$(P)
+# % gui, $(name=), edm, EDM_FILE=lIntegralT.edl, P=$(P)
 ################################################################
 # Read records
 ################################################################
@@ -30,8 +34,9 @@
 #% archiver 10 Monitor
 #% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):TEMP
 record(ai, "$(P):TEMP") {
+  field(DESC, "$(TEMPDESC=Chiller water temp)")
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getTemp $(PORT) $(ADDR)")
+  field(INP, "@lIntegralT.proto getTemp $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -53,7 +58,7 @@ record(ai, "$(P):TEMP") {
 # % archiver 10 Monitor
 record(ai, "$(P):EXT_TEMP") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getExtTemp1($(P)) $(PORT) $(ADDR)")
+  field(INP, "@lIntegralT.proto getExtTemp($(P)) $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(HIHI, "$(HIHI)")
@@ -75,7 +80,7 @@ record(ai, "$(P):EXT_TEMP") {
 # % archiver 10 Monitor
 record(ai, "$(P):SET_TEMP:RBV") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getTempReadback $(PORT) $(ADDR)")
+  field(INP, "@lIntegralT.proto getTempReadback $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(EGU, "C")
   field(PREC, "2")
@@ -89,10 +94,53 @@ record(ai, "$(P):SET_TEMP:RBV") {
 #% alh $SEVRCOMMAND UP_ANY dls-alh-handler.py $(P):STATUS
 record(ai, "$(P):STATUS") {
   field(DTYP, "stream")
-  field(INP, "@lRE2xx.proto getStatus $(PORT) $(ADDR)")
+  field(INP, "@lIntegralT.proto getStatus $(PORT) $(ADDR)")
   field(SCAN, "$(SCAN) second")
   field(HHSV, "MAJOR")
   field(HIHI, "1")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Read the power status
+# ///
+record(bi, "$(P):POWER") {
+  field(DTYP, "stream")
+  field(INP, "@lIntegralT.proto getPowerStatus $(PORT) $(ADDR)")
+  field(SCAN, "1 second")
+  field(ZNAM, "On")
+  field(ONAM, "Off")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Read which program is running now (0=none)
+# ///
+record(ai, "$(P):PROGRUNNING_RAW") {
+  field(DESC, "Program number currently running")
+  field(DTYP, "stream")
+  field(INP, "@lIntegralT.proto getProgRunning $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(SDIS, "$(P):DISABLE")
+  field(FLNK, "$(P):PROGRUNNING")
+}
+
+record(calcout, "$(P):PROGRUNNING") {
+  field(DESC, "Is any program running now")
+  field(INPA, "$(P):PROGRUNNING_RAW")
+  field(CALC, "A>0")
+}
+
+# ///
+# /// Read the control variable
+# ///
+record(bi, "$(P):CONTROL_VAR") {
+  field(DESC, "Current control variable")
+  field(DTYP, "stream")
+  field(INP, "@lIntegralT.proto getControlVariable $(PORT) $(ADDR)")
+  field(SCAN, "$(SCAN) second")
+  field(ZNAM, "Internal")
+  field(ONAM, "Ext Pt100")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -106,8 +154,109 @@ record(ai, "$(P):STATUS") {
 record(ao, "$(P):SET_TEMP") {
   field(DTYP, "stream")
   field(DESC, "Setpoint temperature")
-  field(OUT, "@lRE2xx.proto setTemp $(PORT) $(ADDR)")
+  field(OUT, "@lIntegralT.proto setTemp $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Switch device to standby
+# ///
+record(bo, "$(P):STANDBY") {
+  field(DTYP, "stream")
+  field(DESC, "Switch device to standby")
+  field(OUT, "@lIntegralT.proto stop $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Switch device on
+# ///
+record(bo, "$(P):ON") {
+  field(DTYP, "stream")
+  field(DESC, "Switch device on")
+  field(OUT, "@lIntegralT.proto start $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Set the control variable
+# ///
+record(bo, "$(P):SET_CONTROL_VAR") {
+  field(DESC, "Set control variable")
+  field(DTYP, "stream")
+  field(OUT, "@lIntegralT.proto setControlVariable($(P)) $(PORT) $(ADDR)")
+  field(ZNAM, "Internal")
+  field(ONAM, "Ext Pt100")
+  field(SDIS, "$(P):DISABLE")
+}
+
+################################################################
+# Ramping
+################################################################
+# ///
+# /// Set the ramp target temperature
+# ///
+#% autosave 1 VAL
+record(ao, "$(P):RTEMP") {
+  field(DESC, "Ramp target temperature")
+  field(PREC, "2")
+  field(EGU, "C")
+  field(PINI, "YES")
+  field(FLNK, "$(P):RTIME")
+}
+
+# ///
+# /// Set the ramp rate
+# ///
+#% autosave 1 VAL
+record(ao, "$(P):RRATE") {
+  field(DESC, "Ramp rate")
+  field(PINI, "YES")
+  field(PREC, "2")
+  field(EGU, "C/min")
+  field(FLNK, "$(P):RTIME")
+  field(DRVH, "$(RRDRVH=10.00)")
+  field(DRVL, "$(RRDRVL=0.01)")
+}
+
+# ///
+# /// Calculate the ramp time
+# ///
+record(calc, "$(P):RTIME") {
+  field(DESC, "Ramp time")
+  field(INPA, "$(P):RRATE")
+  field(INPB, "$(P):TEMP")
+  field(INPC, "$(P):RTEMP")
+  field(CALC, "ABS(C-B)/A")
+  field(EGU, "min")
+}
+
+# ///
+# /// Start the ramp program
+# ///
+record(ao, "$(P):RSTART") {
+  field(DESC, "Start program")
+  field(DTYP, "stream")
+  field(OUT, "@lIntegralT.proto startProg($(P)) $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+}
+
+# ///
+# /// Stop the ramp program
+# ///
+record(ao, "$(P):RSTOP") {
+  field(DESC, "Stop program")
+  field(DTYP, "stream")
+  field(OUT, "@lIntegralT.proto stopProg $(PORT) $(ADDR)")
+  field(SDIS, "$(P):DISABLE")
+  field(FLNK, "$(P):RSTOP_POS")
+}
+
+record(dfanout, "$(P):RSTOP_POS") {
+  field(DESC, "Adjust setpoint temperature")
+  field(OMSL, "closed_loop")
+  field(DOL, "$(P):TEMP")
+  field(OUTA, "$(P):SET_TEMP PP")
 }
 
 #################################################################
@@ -119,7 +268,7 @@ record(ao, "$(P):SET_TEMP") {
 record(stringin, "$(P):RESPONSE") {
   field(DTYP, "stream")
   field(DESC, "Command string response.")
-  field(INP, "@lRE2xx.proto gen $(PORT) $(ADDR)")
+  field(INP, "@lIntegralT.proto gen $(PORT) $(ADDR)")
   field(SDIS, "$(P):DISABLE")
 }
 
@@ -134,7 +283,7 @@ record(stringout, "$(P):COMMAND") {
 
 # % autosave 1 VAL
 record(bo, "$(P):DISABLE") {
-  field(DESC, "Disable comms")
+  field(DESC, "Disable communication")
   field(PINI, "YES")
   field(VAL, "1")
   field(OMSL, "supervisory")
