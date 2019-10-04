@@ -15,6 +15,7 @@ DB += lRE2xx.template
 DB += lIntegralT.template
 DB += lRE2xx_RS485.template
 DB += lVariocool.template
+DB += lMCxxx.template
 
 include $(TOP)/configure/RULES
 #----------------------------------------

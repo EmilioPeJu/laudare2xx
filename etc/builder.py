@@ -25,3 +25,12 @@ class lVariocool(AutoSubstitution, AutoProtocol):
     
     #AutoProtocol attributes
     ProtocolFiles = ['lREVariocool.proto']
+    
+class lMCxxx(AutoSubstitution, AutoProtocol):
+    Dependencies = (Busy,)
+    # Substitution attributes
+    TemplateFile = 'lMCxxx.template'
+
+    # AutoProtocol attributes
+    ProtocolFiles = ['lMCxxx.proto']
+

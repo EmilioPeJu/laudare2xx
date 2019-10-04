@@ -17,6 +17,8 @@
 # % macro,  HIGH, HIGH value for input temperature
 # % macro,  LOW,  LOW value for input temperature
 # % macro,  LOLO, LOLO value for input temperature
+# % macro,  RRDRVH, Ramp rate high limit
+# % macro,  RRDRVL, Ramp rate low limit
 # % macro,  name, object and gui association name
 # % macro,  DESC, Description
 #
